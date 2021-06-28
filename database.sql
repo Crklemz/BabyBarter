@@ -8,9 +8,9 @@ CREATE TABLE "user" (
 	"id" serial NOT NULL,
 	"username" character varying(80) NOT NULL,
 	"password" character varying(100) NOT NULL,
-	"nearest_major_city" varchar(255) NOT NULL,
+	"city" varchar(255) NOT NULL,
 	"email" varchar(255) NOT NULL,
-	"phone" integer NOT NULL,
+	"phone" text NOT NULL,
 	CONSTRAINT "user_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
