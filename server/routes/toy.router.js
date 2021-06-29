@@ -6,7 +6,13 @@ const router = express.Router();
  * GET route template
  */
 router.get('/', (req, res) => {
-  // GET route code here
+  let queryText = `SELECT * FROM "items";`;
+  pool.query(queryText).then((result) => {
+    res.send(result.rows);
+  }).catch((error) => {
+    console.log('error in GET', error);
+    res.sendStatus(500);
+  })
 });
 
 /**
@@ -17,3 +23,4 @@ router.post('/', (req, res) => {
 });
 
 module.exports = router;
+
