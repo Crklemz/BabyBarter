@@ -11,6 +11,7 @@ function Home () {
         const history = useHistory();
 
 
+
     useEffect(() => {
         dispatch({ type: 'FETCH_TOYS' });
       }, [])
@@ -19,9 +20,33 @@ function Home () {
         history.push('/confirmclaim')
     }
 
+    const filterByCategory = () => {
+      let toyProperty = category;
+      
+      let filterValue = 
+    }
+
     return (
-    <>
+        <div>
+          {toys.filter(toy => toy.toyProperty == {filterValue}).map(filteredToy => (
+            <li key={filteredToy.id}>
+            <p>Toy Title: {filteredToy.title}</p>
+            <p>Description: {filteredToy.description}</p>
+            <p>For ages: {filteredToy.age}+</p>
+            <p>Condition: {filteredToy.condition}</p>
+          <img src={filteredToy.image_url} alt={filteredToy.description} width="100px" height="100px"/>
+          <button onClick={handleClick}>Claim Toy</button>
+            </li>
+          ))}
+        </div>
+      );
+}
+export default Home;
+
+
+/* <>
         <h2>Available Toys</h2>
+        
         <ul>
         {toys.map (toy => {
           return (
@@ -36,7 +61,4 @@ function Home () {
           )
         })}
       </ul>
-    </>
-    )
-}
-export default Home;
+    </> */
