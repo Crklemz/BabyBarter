@@ -12,14 +12,14 @@ import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Home from '../Home/Home';
 import Header from '../Header/Header';
+import Profile from '../Profile/Profile';
+import AddNewToy from '../AddNewToy/AddNewToy';
+import ConfirmClaim from '../ConfirmClaim/ConfirmClaim';
 
 import './App.css';
 
@@ -58,11 +58,27 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
+            // logged in shows profile else shows LoginPage
             exact
-            path="/info"
+            path="/profile"
           >
-            <InfoPage />
+            <Profile />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows AddNewToy else shows LoginPage
+            exact
+            path="/addnewtoy"
+          >
+            <AddNewToy />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows ConfirmClaim else shows LoginPage
+            exact
+            path="/confirmclaim"
+          >
+            <ConfirmClaim />
           </ProtectedRoute>
 
           {/* When a value is supplied for the authRedirect prop the user will
