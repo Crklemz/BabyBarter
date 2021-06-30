@@ -25,7 +25,6 @@ function Home () {
       filterValue = event.target.id;
       console.log('in filterByCategory, toyProperty is -->', toyProperty);
       console.log('in filterByCategory, filterValue is -->', filterValue);
-      
     }
 
     return (

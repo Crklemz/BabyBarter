@@ -36,11 +36,14 @@ function AddNewToy() {
         console.log('in handleSubmit, adding newToy -->', newToy);
     
         // dispatch sent to toy.saga, payload as below
-        dispatch({type:'ADD_TOY', payload: newToy})
+        dispatch({type:'ADD_TOY', payload: newToy});
+        alert('New Toy Added!');
+        history.push('/profile')
     }
 
     const handleCancel = () => {
         //clear inputs before leaving page
+        setNewToy('');
         history.push('/profile')
     }
 
@@ -95,5 +98,3 @@ function AddNewToy() {
 }
 
 export default AddNewToy;
-
-//https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL6TGMnmZHf2cMD_LqwRZ0zlSPwuKqi6YMqACTQrOovksvS-vGjhXzTWCJiaI&usqp=CAc
