@@ -8,17 +8,18 @@ import {
 
 import { useDispatch } from 'react-redux';
 
-import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import Home from '../Home/Home';
+import Header from '../Header/Header';
+import Profile from '../Profile/Profile';
+import AddNewToy from '../AddNewToy/AddNewToy';
+import ConfirmClaim from '../ConfirmClaim/ConfirmClaim';
 
 import './App.css';
 
@@ -32,19 +33,17 @@ function App() {
   return (
     <Router>
       <div>
-        <Nav />
+        <Header />
+        {/* <Route
+        exact
+        path="/home"
+        >
+          <Home />
+        </Route> */}
+
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
-
-          {/* Visiting localhost:3000/about will show the about page. */}
-          <Route
-            // shows AboutPage at all times (logged in or not)
-            exact
-            path="/about"
-          >
-            <AboutPage />
-          </Route>
 
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -59,11 +58,27 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
+            // logged in shows profile else shows LoginPage
             exact
-            path="/info"
+            path="/profile"
           >
-            <InfoPage />
+            <Profile />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows AddNewToy else shows LoginPage
+            exact
+            path="/addnewtoy"
+          >
+            <AddNewToy />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows ConfirmClaim else shows LoginPage
+            exact
+            path="/confirmclaim"
+          >
+            <ConfirmClaim />
           </ProtectedRoute>
 
           {/* When a value is supplied for the authRedirect prop the user will
@@ -75,7 +90,7 @@ function App() {
             // - else shows LoginPage at /login
             exact
             path="/login"
-            authRedirect="/user"
+            authRedirect="/home"
           >
             <LoginPage />
           </ProtectedRoute>
@@ -86,21 +101,20 @@ function App() {
             // - else shows RegisterPage at "/registration"
             exact
             path="/registration"
-            authRedirect="/user"
+            authRedirect="/home"
           >
             <RegisterPage />
           </ProtectedRoute>
 
-          <ProtectedRoute
+          <Route
             // with authRedirect:
             // - if logged in, redirects to "/user"
             // - else shows LandingPage at "/home"
             exact
             path="/home"
-            authRedirect="/user"
           >
-            <LandingPage />
-          </ProtectedRoute>
+            <Home />
+          </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

@@ -26,22 +26,16 @@ CREATE TABLE "items" (
 	"available" BOOLEAN NOT NULL DEFAULT 'true',
 	"image_url" varchar(255) NOT NULL,
 	"user_id" integer NOT NULL,
-	"claimer_id" integer NOT NULL,
+	"claimer_id" integer,
 	CONSTRAINT "items_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
 
-CREATE TABLE "Categories" (
+--Add categories to insert into table!!!!!!!!!!!!!!!!!!!!!
+CREATE TABLE "Categories" ( 
 	"id" serial NOT NULL,
-	"slide" varchar(80) NOT NULL,
-	"swing" varchar(80) NOT NULL,
-	"action_figure" varchar(80) NOT NULL,
-	"doll" varchar(80) NOT NULL,
-	"stuffed_animal" varchar(80) NOT NULL,
-	"educational" varchar(80) NOT NULL,
-	"stackables" varchar(80) NOT NULL,
-	"books" varchar(80) NOT NULL,
+	"category" varchar (255) NOT NULL,
 	CONSTRAINT "Categories_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
