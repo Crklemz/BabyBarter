@@ -10,8 +10,19 @@ function* fetchToys() {
   }
 }
 
+function* postToy(action) {
+  console.log('in postToy, action.payload is -->', action.payload);
+  
+  try {
+    yield axios.post(`/api/toy`, action.payload);
+  } catch (error) {
+    console.log('error in postToy SAGA -->', error);
+  }
+}
+
 function* toySaga() {
   yield takeEvery('FETCH_TOYS', fetchToys);
+  yield takeEvery('ADD_TOY', postToy);
 }
 
 export default toySaga;

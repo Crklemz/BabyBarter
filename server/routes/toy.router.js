@@ -14,17 +14,17 @@ router.get('/', (req, res) => {
   })
 });
 
-//Post Route
+//Post Route - adds toy and attaches id of user who added
  router.post('/', rejectUnauthenticated, (req, res) => {
   // endpoint functionality
-  query = `INSERT INTO "items" ("title", "description", "condition", "category", "age", "available", "image_url", "user_id")
-            VALUES ($1, $2, $3, $4, $5, $5, $6, $7, $8);`;
-    pool.query(query, [req.body.title, req.body.description, req.body.description, req.body.category, req.body.age, req.body.available, req.body.image_url, req.user.id])
+  query = `INSERT INTO "items" ("title", "description", "condition", "category", "age", "image_url", "user_id")
+            VALUES ($1, $2, $3, $4, $5, $5, $6, $7);`;
+    pool.query(query, [req.body.title, req.body.description, req.body.condition, req.body.category, req.body.age, req.body.image_url, req.user.id])
     .then(result => {
       res.sendStatus(201)
     })
     .catch(error => {
-      console.log('error', error);
+      console.log('error in post route', error);
       res.sendStatus(500);
     })
 });

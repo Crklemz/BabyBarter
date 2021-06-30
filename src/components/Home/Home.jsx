@@ -37,7 +37,7 @@ function Home () {
         </div>
 
         <div>
-          {toys.filter(toy => toy.toyProperty == {filterValue}).map(filteredToy => (
+          {toys.filter(toy => toy.toyProperty != {filterValue}).map(filteredToy => (
             <li key={filteredToy.id}>
             <p>Toy Title: {filteredToy.title}</p>
             <p>Description: {filteredToy.description}</p>
