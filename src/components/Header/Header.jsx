@@ -34,6 +34,11 @@ function Header() {
             <Link className="navLink" to="/profile">
               Profile
             </Link>
+
+            <Link className="navLink" to="/addnewtoy">
+              Add New Toy
+            </Link>
+
             <LogOutButton className="navLink" />
           </>
         ) : (
