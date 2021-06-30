@@ -44,7 +44,8 @@ function AddNewToy() {
     const handleCancel = () => {
         //clear inputs before leaving page
         setNewToy('');
-        history.push('/profile')
+        history.push('/profile');
+        
     }
 
     console.log('in AddNewToy, newToy is -->', newToy);
