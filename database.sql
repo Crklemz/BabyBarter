@@ -32,7 +32,8 @@ CREATE TABLE "items" (
   OIDS=FALSE
 );
 
-CREATE TABLE "Categories" (
+--Add categories to insert into table!!!!!!!!!!!!!!!!!!!!!
+CREATE TABLE "Categories" ( 
 	"id" serial NOT NULL,
 	"category" varchar (255) NOT NULL,
 	CONSTRAINT "Categories_pk" PRIMARY KEY ("id")

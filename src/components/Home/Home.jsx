@@ -9,7 +9,7 @@ function Home () {
         const dispatch = useDispatch();
         const toys = useSelector(store => store.toys);
         const history = useHistory();
-
+        let filterValue = '';
 
 
     useEffect(() => {
@@ -20,13 +20,22 @@ function Home () {
         history.push('/confirmclaim')
     }
 
-    const filterByCategory = () => {
-      let toyProperty = category;
+    const filterByCategory = (event) => {
+      let toyProperty = "1";
+      filterValue = event.target.id;
+      console.log('in filterByCategory, toyProperty is -->', toyProperty);
+      console.log('in filterByCategory, filterValue is -->', filterValue);
       
-      let filterValue = 
     }
 
     return (
+      <>
+        <div>
+        <input type="button" value="Slide" id="1" onClick={() => filterByCategory(event)} />
+
+         
+        </div>
+
         <div>
           {toys.filter(toy => toy.toyProperty == {filterValue}).map(filteredToy => (
             <li key={filteredToy.id}>
@@ -39,6 +48,7 @@ function Home () {
             </li>
           ))}
         </div>
+        </>
       );
 }
 export default Home;
