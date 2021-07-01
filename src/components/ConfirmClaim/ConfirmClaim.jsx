@@ -12,16 +12,25 @@ function ConfirmClaim() {
         const userInfo = useSelector(store => store.userInfo);
         const claimed = useSelector(store => store.claimed);
         const history = useHistory();
+        
 
         useEffect(() => {
             dispatch({ type: 'FETCH_USERINFO' });
           }, [])
 
+        const handleCancel = () => {
+            history.push('/home');
+        }
+
+        const handleConfirmation = () => {
+            dispatch({type: 'CONFIRM_CLAIM', payload: {available: false, itemId: claimed.id}});
+            history.push('/profile')
+        }
+
     return (
         <>
         <p>confirm claim page</p>
-        <p>{claimed.ownerId}</p>
-        
+
         <div>
             <h3>Toy Owner's Info</h3>
             {userInfo.filter(owner => owner.id == claimed.ownerId).map(filteredOwner => (
@@ -40,8 +49,8 @@ function ConfirmClaim() {
                 <p>For ages: {filteredToy.age}+</p>
                 <p>Condition: {filteredToy.condition}</p>
             <img src={filteredToy.image_url} alt={filteredToy.description} width="100px" height="100px"/>
-            <button>Confirm Claim</button>
-            <button>Cancel</button>
+            <button onClick={handleConfirmation}>Confirm Claim</button>
+            <button onClick={handleCancel}>Cancel</button>
                 </li>
             ))}
         </div>

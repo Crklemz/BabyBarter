@@ -29,6 +29,20 @@ router.get('/', (req, res) => {
     })
 });
 
+//Put Route - updates if a toy is available and who the claimer is upon click of the claim toy button in confirm claim page
+router.put('/', rejectUnauthenticated, (req, res) => {
+  const itemToUpdate = [req.body.available, req.user.id, req.body.itemId]
+  query = `UPDATE "items" SET "available"=$1, "claimer_id"=$2 WHERE "items".id=$3;`;
+  pool.query(query, itemToUpdate)
+  .then(result => {
+  res.sendStatus(202);
+  })
+  .catch (error => {
+    console.log('error in PUT -->', error);
+    res.sendStatus(500);
+  });
+});
+
 //Delete Route - Delete an item if it's something the logged in user added
 router.delete('/:id', (req, res) => {
   // endpoint functionality
@@ -36,9 +50,10 @@ router.delete('/:id', (req, res) => {
   const queryText = `
   DELETE FROM "items" WHERE "id" = $1 AND "user_id" = $2;`;
   pool.query(queryText, itemToDelete)
-  .then((result) => {
+  .then(result => {
     res.sendStatus(200)
-  }).catch((error) => {
+  })
+  .catch((error) => {
     console.log('error in DELETE in server', error);
   });
 });
