@@ -9,6 +9,7 @@ function Profile() {
         const dispatch = useDispatch();
         const toys = useSelector(store => store.toys);
         const user = useSelector(store => store.user);
+
         const history = useHistory();
 
         useEffect(() => {
