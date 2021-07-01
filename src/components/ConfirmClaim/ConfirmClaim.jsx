@@ -8,27 +8,32 @@ function ConfirmClaim() {
 
         const dispatch = useDispatch();
         const toys = useSelector(store => store.toys);
-        const user = useSelector(store => store.user);
+        // const user = useSelector(store => store.user);
+        const userInfo = useSelector(store => store.userInfo);
         const claimed = useSelector(store => store.claimed);
         const history = useHistory();
-        
-
-        // const showClaimed = () => {
-        //     const claimedToyId = claimed;
 
         useEffect(() => {
-            dispatch({ type: 'FETCH_TOYS' });
+            dispatch({ type: 'FETCH_USERINFO' });
           }, [])
 
     return (
         <>
         <p>confirm claim page</p>
-        <p>
-        {user.city} {user.email} {user.phone} {claimed} 
-        </p>
+        <p>{claimed.ownerId}</p>
+        
+        <div>
+            <h3>Toy Owner's Info</h3>
+            {userInfo.filter(owner => owner.id == claimed.ownerId).map(filteredOwner => (
+                <li key={filteredOwner.id}>
+                <p>City: {filteredOwner.city} Email: {filteredOwner.email} Phone: {filteredOwner.phone}</p>
+                </li>
+            ))}
+        </div>
 
         <div>
-            {toys.filter(toy => toy.id == claimed).map(filteredToy => (
+            <h3>Toy Details</h3>
+            {toys.filter(toy => toy.id == claimed.id).map(filteredToy => (
                 <li key={filteredToy.id}>
                 <p>Toy Title: {filteredToy.title}</p>
                 <p>Description: {filteredToy.description}</p>
@@ -36,6 +41,7 @@ function ConfirmClaim() {
                 <p>Condition: {filteredToy.condition}</p>
             <img src={filteredToy.image_url} alt={filteredToy.description} width="100px" height="100px"/>
             <button>Confirm Claim</button>
+            <button>Cancel</button>
                 </li>
             ))}
         </div>

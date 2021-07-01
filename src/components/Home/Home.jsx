@@ -17,8 +17,8 @@ function Home () {
         dispatch({ type: 'FETCH_TOYS' });
       }, [])
 
-    const handleClick = (id) => {
-        dispatch({type: 'SET_CLAIM', payload: id})
+    const handleClick = (id, ownerId) => {
+        dispatch({type: 'SET_CLAIM', payload: {id: id, ownerId: ownerId,}})
         history.push('/confirmclaim')
     }
 
@@ -45,7 +45,7 @@ function Home () {
             <p>For ages: {filteredToy.age}+</p>
             <p>Condition: {filteredToy.condition}</p>
           <img src={filteredToy.image_url} alt={filteredToy.description} width="100px" height="100px"/>
-          <button onClick={() => handleClick(filteredToy.id)}>Claim Toy</button>
+          <button onClick={() => handleClick(filteredToy.id, filteredToy.user_id)}>Claim Toy</button>
             </li>
           ))}
         </div>
