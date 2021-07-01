@@ -20,9 +20,18 @@ function* postToy(action) {
   }
 }
 
+function* confirmClaim(action) {
+  try {
+    yield axios.put('/api/toy', action.payload);
+  } catch (error) {
+  console.log('error in confirmClaim SAGA -->', error);
+  }
+}
+
 function* toySaga() {
   yield takeEvery('FETCH_TOYS', fetchToys);
   yield takeEvery('ADD_TOY', postToy);
+  yield takeEvery('CONFIRM_CLAIM', confirmClaim);
 }
 
 export default toySaga;
