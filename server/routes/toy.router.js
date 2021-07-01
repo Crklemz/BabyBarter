@@ -45,7 +45,6 @@ router.put('/', rejectUnauthenticated, (req, res) => {
 
 //Delete Route - Delete an item if it's something the logged in user added
 router.delete('/:id', (req, res) => {
-  // endpoint functionality
   const itemToDelete = [req.params.id, req.user.id];
   const queryText = `
   DELETE FROM "items" WHERE "id" = $1 AND "user_id" = $2;`;

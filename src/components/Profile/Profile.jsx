@@ -20,6 +20,10 @@ function Profile() {
         history.push('/addnewtoy')
     }
 
+    const handleDelete = (id) => {
+        dispatch({type: 'DELETE_TOY', payload: {id: id}})
+    }
+
     return (
         <div className="container">
             <p>Profile</p>
@@ -36,7 +40,7 @@ function Profile() {
                     <p>Condition: {filteredToy.condition}</p>
                     <img src={filteredToy.image_url} alt={filteredToy.description} width="100px" height="100px"/>
                     <button>No Show</button>
-                    <button>Delete Toy</button>
+                    <button onClick={() => handleDelete(filteredToy.id)}>Delete Toy</button>
                     </li>
                 ))}
             </div>
