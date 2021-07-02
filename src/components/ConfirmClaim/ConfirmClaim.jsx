@@ -34,7 +34,7 @@ function ConfirmClaim() {
         <div>
             <h3>Toy Owner's Info</h3>
             {userInfo.filter(owner => owner.id == claimed.ownerId).map(filteredOwner => (
-                <li key={filteredOwner.id}>
+                <li key={filteredOwner.id} class="ownerInfo">
                 <p>City: {filteredOwner.city} Email: {filteredOwner.email} Phone: {filteredOwner.phone}</p>
                 </li>
             ))}
@@ -43,7 +43,7 @@ function ConfirmClaim() {
         <div>
             <h3>Toy Details</h3>
             {toys.filter(toy => toy.id == claimed.id).map(filteredToy => (
-                <li key={filteredToy.id}>
+                <li key={filteredToy.id} class="toyPost">
                 <p>Toy Title: {filteredToy.title}</p>
                 <p>Description: {filteredToy.description}</p>
                 <p>For ages: {filteredToy.age}+</p>

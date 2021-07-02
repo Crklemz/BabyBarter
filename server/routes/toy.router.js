@@ -29,11 +29,25 @@ router.get('/', (req, res) => {
     })
 });
 
-//Put Route - updates if a toy is available and who the claimer is upon click of the claim toy button in confirm claim page
+//TOY Put Route - updates if a toy is available and who the claimer is upon click of the claim toy button in confirm claim page
 router.put('/', rejectUnauthenticated, (req, res) => {
   const itemToUpdate = [req.body.available, req.user.id, req.body.itemId]
   query = `UPDATE "items" SET "available"=$1, "claimer_id"=$2 WHERE "items".id=$3;`;
   pool.query(query, itemToUpdate)
+  .then(result => {
+  res.sendStatus(202);
+  })
+  .catch (error => {
+    console.log('error in PUT -->', error);
+    res.sendStatus(500);
+  });
+});
+
+//USER Put Route - updates user info via profile page - only the logged in user has access
+router.put('/', rejectUnauthenticated, (req, res) => {
+  const userToUpdate = [req.body.city, req.body.email, req.body.phone, req.user.id]
+  query = `UPDATE "user" SET "city"=$1, "email"=$2, "phone"=$3 WHERE "user".id=$4;`;
+  pool.query(query, userToUpdate)
   .then(result => {
   res.sendStatus(202);
   })

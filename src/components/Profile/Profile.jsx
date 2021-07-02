@@ -29,11 +29,24 @@ function Profile() {
             <p>Profile</p>
 
             <button onClick={goToAddToy}>Add New Toy</button>
-
+        <section class="ownerInfo">
+            <div>
+                <p>Nearest Major City: {user.city}</p>
+                <button>Edit City</button>
+            </div>
+            <div>
+                <p>Email: {user.email}</p>
+                <button>Edit Email</button>
+            </div>
+            <div>
+                <p>Phone: {user.phone}</p>
+                <button>Edit Phone</button>
+            </div>
+            </section>
             <div>
                 <h3>Toys Added</h3>
                 {toys.filter(toy => toy.user_id == user.id ).map(filteredToy => (
-                    <li key={filteredToy.id}>
+                    <li key={filteredToy.id} class="toyPost">
                     <p>Toy Title: {filteredToy.title}</p>
                     <p>Description: {filteredToy.description}</p>
                     <p>For ages: {filteredToy.age}+</p>
@@ -48,7 +61,7 @@ function Profile() {
             <div>
                 <h3>Toys Claimed</h3>
                 {toys.filter(toy => toy.claimer_id == user.id ).map(filteredToy => (
-                    <li key={filteredToy.id}>
+                    <li key={filteredToy.id} class="toyPost">
                     <p>Toy Title: {filteredToy.title}</p>
                     <p>Description: {filteredToy.description}</p>
                     <p>For ages: {filteredToy.age}+</p>

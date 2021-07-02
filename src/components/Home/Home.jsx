@@ -39,7 +39,7 @@ function Home () {
         <h2>Available Toys:</h2>
         <div>
           {toys.filter(toy => toy.toyProperty != filterValue).map(filteredToy => (
-            <li key={filteredToy.id}>
+            <li key={filteredToy.id} class="toyPost">
             <p>Toy Title: {filteredToy.title}</p>
             <p>Description: {filteredToy.description}</p>
             <p>For ages: {filteredToy.age}+</p>
