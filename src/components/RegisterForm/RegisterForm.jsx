@@ -4,9 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [city, setCity] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  
 
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();

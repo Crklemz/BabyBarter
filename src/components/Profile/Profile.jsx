@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from 'react-redux';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useHistory } from "react-router-dom";
 
 
@@ -7,14 +7,36 @@ import { useHistory } from "react-router-dom";
 function Profile() {
 
         const dispatch = useDispatch();
+        
         const toys = useSelector(store => store.toys);
         const user = useSelector(store => store.user);
+        const [city, setCity] = useState('');
+        const [email, setEmail] = useState('');
+        const [phone, setPhone] = useState('');
+        const [cityBeingEdited, setCityBeingEdited] = useState(false);
+        const [phoneBeingEdited, setPhoneBeingEdited] = useState(false);
+        const [emailBeingEdited, setEmailBeingEdited] = useState(false);
+
 
         const history = useHistory();
 
         useEffect(() => {
             dispatch({ type: 'FETCH_TOYS' });
-          }, [])
+          }, []);
+
+          // toggles if we show the edit screen or not
+    const toggleCityEdit = () => {
+        // set state
+        setCityBeingEdited(!cityBeingEdited)
+    }
+    const togglePhoneEdit = () => {
+        // set state
+        setPhoneBeingEdited(!phoneBeingEdited)
+    }
+    const toggleEmailEdit = () => {
+        // set state
+        setEmailBeingEdited(!emailBeingEdited)
+    }
 
     const goToAddToy = () => {
         history.push('/addnewtoy')
@@ -24,6 +46,16 @@ function Profile() {
         dispatch({type: 'DELETE_TOY', payload: {id: id}})
     }
 
+    const handleCitySubmit = () => {
+        setCityBeingEdited(!cityBeingEdited)
+    }
+    const handleEmailSubmit = () => {
+        setEmailBeingEdited(!emailBeingEdited)
+    }
+    const handlePhoneSubmit = () => {
+        setPhoneBeingEdited(!phoneBeingEdited)
+    }
+
     return (
         <div className="container">
             <p>Profile</p>
@@ -31,16 +63,43 @@ function Profile() {
             <button onClick={goToAddToy}>Add New Toy</button>
         <section class="ownerInfo">
             <div>
+                {!cityBeingEdited ? (
+                <div>
                 <p>Nearest Major City: {user.city}</p>
-                <button>Edit City</button>
+                <button onClick={toggleCityEdit}>Edit City</button>
+                </div>
+                ) : (
+                <form onSubmit={handleCitySubmit}>
+                <input type="text" onChange={(event) => setCity(event.target.value)} placeholder={user.city} />
+                <button type="submit">Submit Change</button>
+                </form>
+                )}
             </div>
             <div>
+            {!emailBeingEdited ? (
+                <div>
                 <p>Email: {user.email}</p>
-                <button>Edit Email</button>
+                <button onClick={toggleEmailEdit}>Edit Email</button>
+                </div>
+                ) : (
+                <form onSubmit={handleEmailSubmit}>
+                <input type="text" onChange={(event) => setEmail(event.target.value)} placeholder={user.email} />
+                <button type="submit">Submit Change</button>
+                </form>
+                )}
             </div>
             <div>
+            {!phoneBeingEdited ? (
+                <div>
                 <p>Phone: {user.phone}</p>
-                <button>Edit Phone</button>
+                <button onClick={togglePhoneEdit}>Edit Phone</button>
+                </div>
+                ) : (
+                <form onSubmit={handlePhoneSubmit}>
+                <input type="text" onChange={(event) => setPhone(event.target.value)} placeholder={user.phone} />
+                <button type="submit">Submit Change</button>
+                </form>
+                )}
             </div>
             </section>
             <div>
