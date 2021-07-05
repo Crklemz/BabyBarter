@@ -68,8 +68,8 @@ function Profile() {
         setPhoneBeingEdited(!phoneBeingEdited)
     }
 
-    const handleNoShow = (itemId) => {
-        dispatch({type: 'MAKE_AVAILABLE', payload: {available: true, itemId: itemId }})
+    const handleMakeAvailable = (itemId) => {
+        dispatch({type: 'MAKE_AVAILABLE', payload: {available: true, itemId: itemId}})
     }
 
     return (
@@ -136,7 +136,7 @@ function Profile() {
                     <p>For ages: {filteredToy.age}+</p>
                     <p>Condition: {filteredToy.condition}</p>
                     <img src={filteredToy.image_url} alt={filteredToy.description} width="100px" height="100px"/>
-                    <button onClick={() => handleNoShow(filteredToy.id)}>No Show</button>
+                    <button onClick={() => handleMakeAvailable(filteredToy.id)}>No Show</button>
                     <button onClick={() => handleDelete(filteredToy.id)}>Delete Toy</button>
                     </li>
                 ))}
@@ -151,7 +151,7 @@ function Profile() {
                     <p>For ages: {filteredToy.age}+</p>
                     <p>Condition: {filteredToy.condition}</p>
                     <img src={filteredToy.image_url} alt={filteredToy.description} width="100px" height="100px"/>
-                    <button>Cancel Claim</button>
+                    <button onClick={() => handleMakeAvailable(filteredToy.id)}>Cancel Claim</button>
                     </li>
                 ))}
             </div>
