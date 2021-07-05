@@ -28,6 +28,14 @@ function* confirmClaim(action) {
   }
 }
 
+function* cancelClaim(action) {
+  try {
+    yield axios.put('/api/toyAvailable', action.payload);
+  } catch (error) {
+  console.log('error in cancelClaim SAGA -->', error);
+  }
+}
+
 function* deleteToy(action) {
   try {
     yield axios.delete(`/api/toy/${action.payload.id}`)
@@ -45,6 +53,7 @@ function* toySaga() {
   yield takeEvery('ADD_TOY', postToy);
   yield takeEvery('CONFIRM_CLAIM', confirmClaim);
   yield takeEvery('DELETE_TOY', deleteToy);
+  yield takeEvery('MAKE_AVAILABLE', cancelClaim);
 }
 
 export default toySaga;
