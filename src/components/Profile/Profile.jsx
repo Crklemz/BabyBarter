@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from 'react-redux';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useHistory } from "react-router-dom";
 
 
@@ -7,21 +7,65 @@ import { useHistory } from "react-router-dom";
 function Profile() {
 
         const dispatch = useDispatch();
+        
         const toys = useSelector(store => store.toys);
         const user = useSelector(store => store.user);
+        const [cityBeingEdited, setCityBeingEdited] = useState(false);
+        const [phoneBeingEdited, setPhoneBeingEdited] = useState(false);
+        const [emailBeingEdited, setEmailBeingEdited] = useState(false);
+        const [userUpdate, setUserUpdate] = useState({city: user.city, email: user.email, phone: user.phone})
 
         const history = useHistory();
 
         useEffect(() => {
-            dispatch({ type: 'FETCH_TOYS' });
-          }, [])
+            dispatch({type: 'FETCH_TOYS'});
+          }, []);
 
     const goToAddToy = () => {
         history.push('/addnewtoy')
     }
+    
+        const handleDelete = (id) => {
+            dispatch({type: 'DELETE_TOY', payload: {id: id}})
+        }
 
-    const handleDelete = (id) => {
-        dispatch({type: 'DELETE_TOY', payload: {id: id}})
+          // toggles if we show the edit screen or not
+    const toggleCityEdit = () => {
+        // set state
+        setCityBeingEdited(!cityBeingEdited)
+    }
+    const togglePhoneEdit = () => {
+        // set state
+        setPhoneBeingEdited(!phoneBeingEdited)
+    }
+    const toggleEmailEdit = () => {
+        // set state
+        setEmailBeingEdited(!emailBeingEdited)
+    }
+
+    //user info input changes
+    const handleCityChange = (event) => {
+        setUserUpdate({...userUpdate, city: event.target.value});
+    }
+    const handleEmailChange = (event) => {
+        setUserUpdate({...userUpdate, email: event.target.value});
+    }
+    const handlePhoneChange = (event) => {
+        setUserUpdate({...userUpdate, phone: event.target.value});
+    }
+
+
+    const handleCitySubmit = () => {
+        dispatch({type: 'UPDATE_USER', payload: userUpdate})
+        setCityBeingEdited(!cityBeingEdited)
+    }
+    const handleEmailSubmit = () => {
+        dispatch({type: 'UPDATE_USER', payload: userUpdate})
+        setEmailBeingEdited(!emailBeingEdited)
+    }
+    const handlePhoneSubmit = () => {
+        dispatch({type: 'UPDATE_USER', payload: userUpdate})
+        setPhoneBeingEdited(!phoneBeingEdited)
     }
 
     return (
@@ -31,16 +75,52 @@ function Profile() {
             <button onClick={goToAddToy}>Add New Toy</button>
         <section class="ownerInfo">
             <div>
+                {!cityBeingEdited ? (
+                <div>
                 <p>Nearest Major City: {user.city}</p>
-                <button>Edit City</button>
+                <button onClick={toggleCityEdit}>Edit City</button>
+                </div>
+                ) : (
+                <form onSubmit={handleCitySubmit}>
+                <input type="text" 
+                value={userUpdate.city} 
+                placeholder={user.city}
+                onChange={handleCityChange}  />
+                <button type="submit">Submit Change</button>
+                </form>
+                )}
             </div>
             <div>
+            {!emailBeingEdited ? (
+                <div>
                 <p>Email: {user.email}</p>
-                <button>Edit Email</button>
+                <button onClick={toggleEmailEdit}>Edit Email</button>
+                </div>
+                ) : (
+                <form onSubmit={handleEmailSubmit}>
+                <input type="text" 
+                value={userUpdate.email} 
+                placeholder={user.email}
+                onChange={handleEmailChange}  />
+                <button type="submit">Submit Change</button>
+                </form>
+                )}
             </div>
             <div>
+            {!phoneBeingEdited ? (
+                <div>
                 <p>Phone: {user.phone}</p>
-                <button>Edit Phone</button>
+                <button onClick={togglePhoneEdit}>Edit Phone</button>
+                </div>
+                ) : (
+                <form onSubmit={handlePhoneSubmit}>
+                <input type="text"
+                value={userUpdate.phone}
+                placeholder={user.phone}
+                onChange={handlePhoneChange}  />
+                <button type="submit">Submit Change</button>
+                </form>
+                )}
             </div>
             </section>
             <div>
