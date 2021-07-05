@@ -68,6 +68,10 @@ function Profile() {
         setPhoneBeingEdited(!phoneBeingEdited)
     }
 
+    const handleNoShow = (itemId) => {
+        dispatch({type: 'MAKE_AVAILABLE', payload: {available: true, itemId: itemId }})
+    }
+
     return (
         <div className="container">
             <p>Profile</p>
@@ -132,7 +136,7 @@ function Profile() {
                     <p>For ages: {filteredToy.age}+</p>
                     <p>Condition: {filteredToy.condition}</p>
                     <img src={filteredToy.image_url} alt={filteredToy.description} width="100px" height="100px"/>
-                    <button>No Show</button>
+                    <button onClick={() => handleNoShow(filteredToy.id)}>No Show</button>
                     <button onClick={() => handleDelete(filteredToy.id)}>Delete Toy</button>
                     </li>
                 ))}

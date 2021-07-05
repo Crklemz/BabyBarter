@@ -43,6 +43,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
   });
 });
 
+
 //Delete Route - Delete an item if it's something the logged in user added
 router.delete('/:id', (req, res) => {
   const itemToDelete = [req.params.id, req.user.id];
