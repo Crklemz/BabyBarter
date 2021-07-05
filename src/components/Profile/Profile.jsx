@@ -10,19 +10,24 @@ function Profile() {
         
         const toys = useSelector(store => store.toys);
         const user = useSelector(store => store.user);
-        const [city, setCity] = useState('');
-        const [email, setEmail] = useState('');
-        const [phone, setPhone] = useState('');
         const [cityBeingEdited, setCityBeingEdited] = useState(false);
         const [phoneBeingEdited, setPhoneBeingEdited] = useState(false);
         const [emailBeingEdited, setEmailBeingEdited] = useState(false);
-
+        const [userUpdate, setUserUpdate] = useState({city: user.city, email: user.email, phone: user.phone})
 
         const history = useHistory();
 
         useEffect(() => {
-            dispatch({ type: 'FETCH_TOYS' });
+            dispatch({type: 'FETCH_TOYS'});
           }, []);
+
+    const goToAddToy = () => {
+        history.push('/addnewtoy')
+    }
+    
+        const handleDelete = (id) => {
+            dispatch({type: 'DELETE_TOY', payload: {id: id}})
+        }
 
           // toggles if we show the edit screen or not
     const toggleCityEdit = () => {
@@ -38,21 +43,28 @@ function Profile() {
         setEmailBeingEdited(!emailBeingEdited)
     }
 
-    const goToAddToy = () => {
-        history.push('/addnewtoy')
+    //user info input changes
+    const handleCityChange = (event) => {
+        setUserUpdate({...userUpdate, city: event.target.value});
+    }
+    const handleEmailChange = (event) => {
+        setUserUpdate({...userUpdate, email: event.target.value});
+    }
+    const handlePhoneChange = (event) => {
+        setUserUpdate({...userUpdate, phone: event.target.value});
     }
 
-    const handleDelete = (id) => {
-        dispatch({type: 'DELETE_TOY', payload: {id: id}})
-    }
 
     const handleCitySubmit = () => {
+        dispatch({type: 'UPDATE_USER', payload: userUpdate})
         setCityBeingEdited(!cityBeingEdited)
     }
     const handleEmailSubmit = () => {
+        dispatch({type: 'UPDATE_USER', payload: userUpdate})
         setEmailBeingEdited(!emailBeingEdited)
     }
     const handlePhoneSubmit = () => {
+        dispatch({type: 'UPDATE_USER', payload: userUpdate})
         setPhoneBeingEdited(!phoneBeingEdited)
     }
 
@@ -70,7 +82,10 @@ function Profile() {
                 </div>
                 ) : (
                 <form onSubmit={handleCitySubmit}>
-                <input type="text" onChange={(event) => setCity(event.target.value)} placeholder={user.city} />
+                <input type="text" 
+                value={userUpdate.city} 
+                placeholder={user.city}
+                onChange={handleCityChange}  />
                 <button type="submit">Submit Change</button>
                 </form>
                 )}
@@ -83,7 +98,10 @@ function Profile() {
                 </div>
                 ) : (
                 <form onSubmit={handleEmailSubmit}>
-                <input type="text" onChange={(event) => setEmail(event.target.value)} placeholder={user.email} />
+                <input type="text" 
+                value={userUpdate.email} 
+                placeholder={user.email}
+                onChange={handleEmailChange}  />
                 <button type="submit">Submit Change</button>
                 </form>
                 )}
@@ -96,7 +114,10 @@ function Profile() {
                 </div>
                 ) : (
                 <form onSubmit={handlePhoneSubmit}>
-                <input type="text" onChange={(event) => setPhone(event.target.value)} placeholder={user.phone} />
+                <input type="text"
+                value={userUpdate.phone}
+                placeholder={user.phone}
+                onChange={handlePhoneChange}  />
                 <button type="submit">Submit Change</button>
                 </form>
                 )}
