@@ -35,6 +35,20 @@ router.post('/register', (req, res, next) => {
     });
 });
 
+//USER Put Route - updates user info via profile page - only the logged in user has access
+router.put('/', rejectUnauthenticated, (req, res) => {
+  const userToUpdate = [req.body.city, req.body.email, req.body.phone, req.user.id]
+  query = `UPDATE "user" SET "city"=$1, "email"=$2, "phone"=$3 WHERE "user".id=$4;`;
+  pool.query(query, userToUpdate)
+  .then(result => {
+  res.sendStatus(202);
+  })
+  .catch (error => {
+    console.log('error in PUT -->', error);
+    res.sendStatus(500);
+  });
+});
+
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route
 // this middleware will run our POST if successful

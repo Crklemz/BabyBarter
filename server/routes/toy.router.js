@@ -43,20 +43,6 @@ router.put('/', rejectUnauthenticated, (req, res) => {
   });
 });
 
-//USER Put Route - updates user info via profile page - only the logged in user has access
-router.put('/', rejectUnauthenticated, (req, res) => {
-  const userToUpdate = [req.body.city, req.body.email, req.body.phone, req.user.id]
-  query = `UPDATE "user" SET "city"=$1, "email"=$2, "phone"=$3 WHERE "user".id=$4;`;
-  pool.query(query, userToUpdate)
-  .then(result => {
-  res.sendStatus(202);
-  })
-  .catch (error => {
-    console.log('error in PUT -->', error);
-    res.sendStatus(500);
-  });
-});
-
 //Delete Route - Delete an item if it's something the logged in user added
 router.delete('/:id', (req, res) => {
   const itemToDelete = [req.params.id, req.user.id];
