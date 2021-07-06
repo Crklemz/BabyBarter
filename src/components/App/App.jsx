@@ -27,6 +27,10 @@ function App() {
   
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch({ type: 'FETCH_USER' });
+  }, [dispatch]);
+
   return (
     <Router>
       <div>
