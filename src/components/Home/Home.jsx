@@ -53,23 +53,3 @@ function Home () {
       );
 }
 export default Home;
-
-
-/* <>
-        <h2>Available Toys</h2>
-        
-        <ul>
-        {toys.map (toy => {
-          return (
-            <li key={toy.id}>
-                <p>Toy Title: {toy.title}</p>
-                <p>Description: {toy.description}</p>
-                <p>For ages: {toy.age}+</p>
-                <p>Condition: {toy.condition}</p>
-              <img src={toy.image_url} alt={toy.description} width="100px" height="100px"/>
-              <button onClick={handleClick}>Claim Toy</button>
-            </li>
-          )
-        })}
-      </ul>
-    </> */

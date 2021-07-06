@@ -10,9 +10,7 @@ function Profile() {
         
         const toys = useSelector(store => store.toys);
         const user = useSelector(store => store.user);
-        const [cityBeingEdited, setCityBeingEdited] = useState(false);
-        const [phoneBeingEdited, setPhoneBeingEdited] = useState(false);
-        const [emailBeingEdited, setEmailBeingEdited] = useState(false);
+        const [beingEdited, setBeingEdited] = useState(false);
         const [userUpdate, setUserUpdate] = useState({city: user.city, email: user.email, phone: user.phone})
 
         const history = useHistory();
@@ -30,19 +28,11 @@ function Profile() {
         }
 
           // toggles if we show the edit screen or not
-    const toggleCityEdit = () => {
+    const toggleEdit = () => {
         // set state
-        setCityBeingEdited(!cityBeingEdited)
+        setBeingEdited(!beingEdited)
     }
-    const togglePhoneEdit = () => {
-        // set state
-        setPhoneBeingEdited(!phoneBeingEdited)
-    }
-    const toggleEmailEdit = () => {
-        // set state
-        setEmailBeingEdited(!emailBeingEdited)
-    }
-
+   
     //user info input changes
     const handleCityChange = (event) => {
         setUserUpdate({...userUpdate, city: event.target.value});
@@ -55,17 +45,10 @@ function Profile() {
     }
 
 
-    const handleCitySubmit = () => {
+    const handleSubmit = () => {
         dispatch({type: 'UPDATE_USER', payload: userUpdate})
-        setCityBeingEdited(!cityBeingEdited)
-    }
-    const handleEmailSubmit = () => {
-        dispatch({type: 'UPDATE_USER', payload: userUpdate})
-        setEmailBeingEdited(!emailBeingEdited)
-    }
-    const handlePhoneSubmit = () => {
-        dispatch({type: 'UPDATE_USER', payload: userUpdate})
-        setPhoneBeingEdited(!phoneBeingEdited)
+        setBeingEdited(!beingEdited)
+        location.reload();
     }
 
     const handleMakeAvailable = (itemId) => {
@@ -74,59 +57,51 @@ function Profile() {
 
     return (
         <div className="container">
-            <p>Profile</p>
+        
+            <h2>Profile</h2>
 
-            <button onClick={goToAddToy}>Add New Toy</button>
-        <section class="ownerInfo">
-            <div>
-                {!cityBeingEdited ? (
+            <section class="ownerInfo">
                 <div>
-                <p>Nearest Major City: {user.city}</p>
-                <button onClick={toggleCityEdit}>Edit City</button>
+                    {!beingEdited ? (
+                    <div>
+                        <h3>User Info</h3>
+                        <p>Nearest Major City: {user.city}</p>
+                        <p>Email: {user.email}</p>
+                        <p>Phone: {user.phone}</p>
+                        <button onClick={toggleEdit}>Edit User Info</button>
+                    </div>
+                    ) : (
+                    <div>
+                        <h3>User Info</h3>
+                            <form onSubmit={handleSubmit}>
+
+                                <input type="text" 
+                                value={userUpdate.city} 
+                                placeholder={user.city}
+                                onChange={handleCityChange}  
+                                />
+
+                                <input type="text" 
+                                value={userUpdate.email} 
+                                placeholder={user.email}
+                                onChange={handleEmailChange}  
+                                />
+
+                                <input type="text"
+                                value={userUpdate.phone}
+                                placeholder={user.phone}
+                                onChange={handlePhoneChange}  
+                                />
+
+                                <button type="submit">Submit Change</button>
+                            </form>
+                    </div>
+                    )}
                 </div>
-                ) : (
-                <form onSubmit={handleCitySubmit}>
-                <input type="text" 
-                value={userUpdate.city} 
-                placeholder={user.city}
-                onChange={handleCityChange}  />
-                <button type="submit">Submit Change</button>
-                </form>
-                )}
-            </div>
-            <div>
-            {!emailBeingEdited ? (
-                <div>
-                <p>Email: {user.email}</p>
-                <button onClick={toggleEmailEdit}>Edit Email</button>
-                </div>
-                ) : (
-                <form onSubmit={handleEmailSubmit}>
-                <input type="text" 
-                value={userUpdate.email} 
-                placeholder={user.email}
-                onChange={handleEmailChange}  />
-                <button type="submit">Submit Change</button>
-                </form>
-                )}
-            </div>
-            <div>
-            {!phoneBeingEdited ? (
-                <div>
-                <p>Phone: {user.phone}</p>
-                <button onClick={togglePhoneEdit}>Edit Phone</button>
-                </div>
-                ) : (
-                <form onSubmit={handlePhoneSubmit}>
-                <input type="text"
-                value={userUpdate.phone}
-                placeholder={user.phone}
-                onChange={handlePhoneChange}  />
-                <button type="submit">Submit Change</button>
-                </form>
-                )}
-            </div>
             </section>
+
+                <button onClick={goToAddToy}>Add New Toy</button>
+
             <div>
                 <h3>Toys Added</h3>
                 {toys.filter(toy => toy.user_id == user.id ).map(filteredToy => (
@@ -135,11 +110,16 @@ function Profile() {
                     <p>Description: {filteredToy.description}</p>
                     <p>For ages: {filteredToy.age}+</p>
                     <p>Condition: {filteredToy.condition}</p>
+                    {filteredToy.available ? (
+                        <p>Toy Available</p>
+                    ) : ( 
+                        <p>Toy has been claimed!</p>
+                    )}
                     <img src={filteredToy.image_url} alt={filteredToy.description} width="100px" height="100px"/>
                     <button onClick={() => handleMakeAvailable(filteredToy.id)}>No Show</button>
                     <button onClick={() => handleDelete(filteredToy.id)}>Delete Toy</button>
                     </li>
-                ))}
+                    ))}
             </div>
 
             <div>
