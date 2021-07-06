@@ -9,7 +9,9 @@ function Home () {
         const dispatch = useDispatch();
         const toys = useSelector(store => store.toys);
         const history = useHistory();
-        let filterValue = '';
+        const [filterByCategory, setFilterByCategory] = useState(false);
+        const [category, setCategory] = useState(0);
+        
         // let [claimedToy, setClaimedToy] = useState({title: '', age: '', condition: '', description: '', image_url: ''});
 
 
@@ -22,34 +24,66 @@ function Home () {
         history.push('/confirmclaim')
     }
 
-    const filterByCategory = (event) => {
-      let toyProperty = "1";
-      filterValue = event.target.id;
-      console.log('in filterByCategory, toyProperty is -->', toyProperty);
-      console.log('in filterByCategory, filterValue is -->', filterValue);
+    const toggleCategoryFilter = (event) => {
+        setCategory(event.target.value);
+
+        if(event.target.value == 0) {
+          setFilterByCategory(false);
+        } else {
+          setFilterByCategory(true);
+        }
+        return;
     }
 
     return (
-      <>
-        {/* <div>
-        <input type="button" value="Slide" id="1" onClick={() => filterByCategory()} />
-
-         
-        </div> */}
+      <main>
+        
         <h2>Available Toys:</h2>
-        <div>
-          {toys.filter(toy => toy.toyProperty != filterValue && toy.available == true).map(filteredToy => (
-            <li key={filteredToy.id} class="toyPost">
-            <p>Toy Title: {filteredToy.title}</p>
-            <p>Description: {filteredToy.description}</p>
-            <p>For ages: {filteredToy.age}+</p>
-            <p>Condition: {filteredToy.condition}</p>
-          <img src={filteredToy.image_url} alt={filteredToy.description} width="100px" height="100px"/>
-          <button onClick={() => handleClick(filteredToy.id, filteredToy.user_id)}>Claim Toy</button>
-            </li>
-          ))}
-        </div>
-        </>
-      );
-}
+
+        <select name="Category" value={category} onChange={toggleCategoryFilter}>
+                <option value="0">Show All</option>
+                <option value="1">Slide</option>
+                <option value="2">Swing</option>
+                <option value="3">Action Figure</option>
+                <option value="4">Doll</option>
+                <option value="5">Stuffed Animal</option>
+                <option value="6">Educational</option>
+                <option value="7">Stackable</option>
+                <option value="8">Book</option>
+        </select>
+
+
+            {filterByCategory ? (
+                <div name="render with category filter">
+                    {toys.filter(toy => toy.category == category && toy.available == true).map(filteredToy => (
+                      <li key={filteredToy.id} class="toyPost">
+                        <p>Toy Title: {filteredToy.title}</p>
+                        <p>Description: {filteredToy.description}</p>
+                        <p>For ages: {filteredToy.age}+</p>
+                        <p>Condition: {filteredToy.condition}</p>
+                        <img src={filteredToy.image_url} alt={filteredToy.description} width="100px" height="100px"/>
+                        <button onClick={() => handleClick(filteredToy.id, filteredToy.user_id)}>Claim Toy</button>
+                      </li>
+                    ))}
+                </div>
+
+          ) : (
+
+                <div class="render all">
+                    {toys.filter(toy => toy.available == true).map(filteredToy => (
+                      <li key={filteredToy.id} class="toyPost">
+                        <p>Toy Title: {filteredToy.title}</p>
+                        <p>Description: {filteredToy.description}</p>
+                        <p>For ages: {filteredToy.age}+</p>
+                        <p>Condition: {filteredToy.condition}</p>
+                        <img src={filteredToy.image_url} alt={filteredToy.description} width="100px" height="100px"/>
+                        <button onClick={() => handleClick(filteredToy.id, filteredToy.user_id)}>Claim Toy</button>
+                      </li>
+                    ))}
+                </div>
+              )}
+         
+      </main>  
+)};
+
 export default Home;
