@@ -49,7 +49,7 @@ function Profile() {
     const handleSubmit = () => {
         dispatch({type: 'UPDATE_USER', payload: userUpdate})
         setBeingEdited(!beingEdited)
-
+        location.reload();
     }
 
     const handleMakeAvailable = (itemId) => {

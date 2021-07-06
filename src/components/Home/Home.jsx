@@ -11,6 +11,8 @@ function Home () {
         const history = useHistory();
         const [filterByCategory, setFilterByCategory] = useState(false);
         const [category, setCategory] = useState(0);
+        const [age, setAge] = useState(0);
+        const filterCategory = 'toy.category';
         
         // let [claimedToy, setClaimedToy] = useState({title: '', age: '', condition: '', description: '', image_url: ''});
 
@@ -27,13 +29,26 @@ function Home () {
     const toggleCategoryFilter = (event) => {
         setCategory(event.target.value);
 
-        if(event.target.value == 0) {
+        if(event.target.value == 0 && age == 0) {
           setFilterByCategory(false);
         } else {
           setFilterByCategory(true);
         }
         return;
     }
+
+    const toggleAgeFilter = (event) => {
+      setAge(event.target.value);
+
+      if(event.target.value == 0 && category == 0) {
+        setFilterByCategory(false);
+      } else {
+        setFilterByCategory(true);
+      }
+      return;
+  }
+
+    
 
     return (
       <main>
@@ -52,10 +67,21 @@ function Home () {
                 <option value="8">Book</option>
         </select>
 
+        <select name="Age" value={age} onChange={toggleAgeFilter}>
+                <option value="-1">Show All</option>
+                <option value="0">0+</option>
+                <option value="1">1+</option>
+                <option value="2">2+</option>
+                <option value="3">3+</option>
+                <option value="4">4+</option>
+                <option value="5">5+</option>
+                <option value="6">6+</option>
+        </select>
+
 
             {filterByCategory ? (
                 <div name="render with category filter">
-                    {toys.filter(toy => toy.category == category && toy.available == true).map(filteredToy => (
+                    {toys.filter(toy => toy.category == category && toy.age >= age && toy.available == true).map(filteredToy => (
                       <li key={filteredToy.id} class="toyPost">
                         <p>Toy Title: {filteredToy.title}</p>
                         <p>Description: {filteredToy.description}</p>
@@ -81,7 +107,9 @@ function Home () {
                       </li>
                     ))}
                 </div>
-              )}
+              )
+              
+              }
          
       </main>  
 )};
