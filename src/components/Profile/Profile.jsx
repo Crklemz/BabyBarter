@@ -17,7 +17,6 @@ function Profile() {
 
         useEffect(() => {
             dispatch({type: 'FETCH_TOYS'});
-
           }, []);
 
     const goToAddToy = () => {
@@ -49,11 +48,12 @@ function Profile() {
     const handleSubmit = () => {
         dispatch({type: 'UPDATE_USER', payload: userUpdate})
         setBeingEdited(!beingEdited)
-        location.reload();
+
     }
 
     const handleMakeAvailable = (itemId) => {
         dispatch({type: 'MAKE_AVAILABLE', payload: {available: true, itemId: itemId}})
+
     }
 
     return (

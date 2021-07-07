@@ -37,7 +37,7 @@ function AddNewToy() {
     
         // dispatch sent to toy.saga, payload as below
         dispatch({type:'ADD_TOY', payload: newToy});
-        dispatch({type: 'FETCH_TOYS'})
+        // dispatch({type: 'FETCH_TOYS'})
         alert('New Toy Added!');
         history.push('/profile')
     }

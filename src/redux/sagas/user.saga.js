@@ -27,6 +27,7 @@ function* fetchUser() {
 function* updateUser (action) {
   try {
     yield axios.put(`/api/user`, action.payload)
+    yield put({type: 'FETCH_USER'})
   } catch(error) {
     console.log('error in updateUser -->', error);
   }

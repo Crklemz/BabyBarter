@@ -11,7 +11,7 @@ function Home () {
         const history = useHistory();
         const [filterByCategory, setFilterByCategory] = useState(false);
         const [category, setCategory] = useState(0);
-        const [age, setAge] = useState(0);
+        const [age, setAge] = useState(-1);
         const filterCategory = 'toy.category';
         
         // let [claimedToy, setClaimedToy] = useState({title: '', age: '', condition: '', description: '', image_url: ''});
@@ -40,7 +40,7 @@ function Home () {
     const toggleAgeFilter = (event) => {
       setAge(event.target.value);
 
-      if(event.target.value == 0 && category == 0) {
+      if(event.target.value == 0 && category == -1) {
         setFilterByCategory(false);
       } else {
         setFilterByCategory(true);
@@ -55,6 +55,8 @@ function Home () {
         
         <h2>Available Toys:</h2>
 
+        <div>
+        <p>Filter By Category:</p>
         <select name="Category" value={category} onChange={toggleCategoryFilter}>
                 <option value="0">Show All</option>
                 <option value="1">Slide</option>
@@ -66,7 +68,10 @@ function Home () {
                 <option value="7">Stackable</option>
                 <option value="8">Book</option>
         </select>
+        </div>
 
+        <div>
+        <p>Filter By Age:</p>
         <select name="Age" value={age} onChange={toggleAgeFilter}>
                 <option value="-1">Show All</option>
                 <option value="0">0+</option>
@@ -77,7 +82,7 @@ function Home () {
                 <option value="5">5+</option>
                 <option value="6">6+</option>
         </select>
-
+        </div>
 
             {filterByCategory ? (
                 <div name="render with category filter">

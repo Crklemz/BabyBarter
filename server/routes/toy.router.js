@@ -29,6 +29,22 @@ router.get('/', (req, res) => {
     })
 });
 
+// try {
+//   await connection.query('BEGIN');
+//   const queryText = `INSERT INTO "items" ("title", "description", "condition", "category", "age", "image_url", "user_id")
+//   VALUES ($1, $2, $3, $4, $5, $6, $7);`;
+//   await connection.query(queryText, [req.body.title, req.body.description, req.body.condition, req.body.category, req.body.age, req.body.image_url, req.user.id]);
+//   await connection.query('COMMIT');
+//   res.sendStatus(201)
+// } catch (error) {
+//   await connection.query('ROLLBACK');
+//   console.log('error in toy post route -->', error);
+//   res.sendStatus(500);
+// } finally {
+//   connection.release()
+// }
+
+
 //TOY Put Route - updates if a toy is available and who the claimer is upon click of the claim toy button in confirm claim page
 router.put('/', rejectUnauthenticated, (req, res) => {
   const itemToUpdate = [req.body.available, req.user.id, req.body.itemId]
@@ -45,7 +61,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
 
 
 //Delete Route - Delete an item if it's something the logged in user added
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
   const itemToDelete = [req.params.id, req.user.id];
   const queryText = `
   DELETE FROM "items" WHERE "id" = $1 AND "user_id" = $2;`;

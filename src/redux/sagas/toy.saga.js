@@ -15,6 +15,7 @@ function* postToy(action) {
   
   try {
     yield axios.post(`/api/toy`, action.payload);
+    yield put({type: 'FETCH_TOYS'});
   } catch (error) {
     console.log('error in postToy SAGA -->', error);
   }
@@ -23,6 +24,7 @@ function* postToy(action) {
 function* confirmClaim(action) {
   try {
     yield axios.put('/api/toy', action.payload);
+    yield put({type: 'FETCH_TOYS'})
   } catch (error) {
   console.log('error in confirmClaim SAGA -->', error);
   }
@@ -31,6 +33,7 @@ function* confirmClaim(action) {
 function* cancelClaim(action) {
   try {
     yield axios.put('/api/toyAvailable', action.payload);
+    yield put({type: 'FETCH_TOYS'})
   } catch (error) {
   console.log('error in cancelClaim SAGA -->', error);
   }

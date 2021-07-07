@@ -24,7 +24,7 @@ function ConfirmClaim() {
 
         const handleConfirmation = () => {
             dispatch({type: 'CONFIRM_CLAIM', payload: {available: false, itemId: claimed.id}});
-            history.push('/profile')
+            history.push('/home')
         }
 
     return (
