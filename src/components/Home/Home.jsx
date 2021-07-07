@@ -29,7 +29,7 @@ function Home () {
     const toggleCategoryFilter = (event) => {
         setCategory(event.target.value);
 
-        if(event.target.value == 0 && age == 0) {
+        if(event.target.value == 0 && age == -1) {
           setFilterByCategory(false);
         } else {
           setFilterByCategory(true);
@@ -40,7 +40,7 @@ function Home () {
     const toggleAgeFilter = (event) => {
       setAge(event.target.value);
 
-      if(event.target.value == 0 && category == -1) {
+      if(event.target.value == -1 && category == 0) {
         setFilterByCategory(false);
       } else {
         setFilterByCategory(true);
