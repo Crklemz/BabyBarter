@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
+import TextField from '@material-ui/core/TextField';
 
 
 
@@ -86,51 +87,74 @@ function Profile() {
         <div className="container">
         
             <h2>Profile</h2>
-
+            <h3>User Info</h3>
+            
             <section class="ownerInfo">
                 <div>
                     {!beingEdited ? (
-                    <div>
-                        <h3>User Info</h3>
-                        <p>Nearest Major City: {user.city}</p>
-                        <p>Email: {user.email}</p>
-                        <p>Phone: {user.phone}</p>
-                        <button onClick={toggleEdit}>Edit User Info</button>
-                    </div>
+                            <div className={classes.root}>
+                                <button onClick={toggleEdit}>Edit User Info</button>
+                                <Grid container spacing={3}>
+                                    <Grid item xs>
+                                    <Paper className={classes.paper}>Nearest Major City: {user.city}</Paper>
+                                    </Grid>
+                                    <Grid item xs>
+                                    <Paper className={classes.paper}>Email: {user.email}</Paper>
+                                    </Grid>
+                                    <Grid item xs>
+                                    <Paper className={classes.paper}>Phone: {user.phone}</Paper>
+                                    </Grid>
+                                </Grid>
+                            </div>    
                     ) : (
-                    <div>
-                        <h3>User Info</h3>
+                        <div>
                             <form onSubmit={handleSubmit}>
-
-                                <input type="text" 
-                                value={userUpdate.city} 
-                                placeholder={user.city}
-                                onChange={handleCityChange}  
-                                />
-
-                                <input type="text" 
-                                value={userUpdate.email} 
-                                placeholder={user.email}
-                                onChange={handleEmailChange}  
-                                />
-
-                                <input type="text"
-                                value={userUpdate.phone}
-                                placeholder={user.phone}
-                                onChange={handlePhoneChange}  
-                                />
-
                                 <button type="submit">Submit Change</button>
+                                <Grid container spacing={3}>
+                                    <Grid item xs>
+                                    <Paper className={classes.paper}>
+                                        <TextField id="standard-basic" 
+                                        type="text" 
+                                        value={userUpdate.city} 
+                                        placeholder={user.city}
+                                        onChange={handleCityChange}
+                                        />
+                                    </Paper>
+                                    </Grid>
+
+                                    <Grid item xs>
+                                    <Paper className={classes.paper}>
+                                        <TextField id="standard-basic" 
+                                        type="text" 
+                                        value={userUpdate.email} 
+                                        placeholder={user.email}
+                                        onChange={handleEmailChange}  
+                                        />
+                                    </Paper>
+                                    </Grid>
+
+                                    <Grid item xs>
+                                    <Paper className={classes.paper}>
+                                        <TextField id="standard-basic"
+                                        type="text"
+                                        value={userUpdate.phone}
+                                        placeholder={user.phone}
+                                        onChange={handlePhoneChange}  
+                                        />
+                                    </Paper>
+                                    </Grid>
+                                </Grid>
                             </form>
-                    </div>
+                        </div>
                     )}
                 </div>
             </section>
 
-                <button onClick={goToAddToy}>Add New Toy</button>
+                
 
             <div>
                 <h3>Toys Added</h3>
+                <button onClick={goToAddToy}>Add New Toy</button>
                 {toys.filter(toy => toy.user_id == user.id ).map(filteredToy => (
                     <li key={filteredToy.id} class="toy-post">
                     <div className={classes.root}>

@@ -20,10 +20,16 @@ import Header from '../Header/Header';
 import Profile from '../Profile/Profile';
 import AddNewToy from '../AddNewToy/AddNewToy';
 import ConfirmClaim from '../ConfirmClaim/ConfirmClaim';
+import {ThemeProvider} from '@material-ui/core/styles';
+
+
+
 
 import './App.css';
 
 function App() {
+  
+  
   
   const dispatch = useDispatch();
 
@@ -32,6 +38,7 @@ function App() {
   }, [dispatch]);
 
   return (
+    <ThemeProvider theme={theme}>
     <Router>
       <div>
         <Header />
@@ -125,6 +132,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </ThemeProvider>
   );
 }
 
