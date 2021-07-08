@@ -18,6 +18,7 @@ function Home () {
         const [category, setCategory] = useState(0);
         const [age, setAge] = useState(-1);
 
+
         const useStyles = makeStyles((theme) => ({
           root: {
             flexGrow: 1,
@@ -38,6 +39,7 @@ function Home () {
             maxHeight: '100%',
           },
         }));
+        const classes = useStyles();
 
         useEffect(() => {
           dispatch({ type: 'FETCH_TOYS' });
@@ -70,10 +72,6 @@ function Home () {
       return;
   }
 
-
-
-    const classes = useStyles();
-    
     return (
       <main>
         
@@ -114,14 +112,45 @@ function Home () {
                 <div name="filtered-home-render">
                     {toys.filter(toy => toy.category == category && toy.age >= age && toy.available == true).map(filteredToy => (
                       <li key={filteredToy.id} class="toy-post">
-                        {/* <p>Toy Title: {filteredToy.title}</p> */}
-                        {/* <p>Description: {filteredToy.description}</p> */}
-                        <p>For ages: {filteredToy.age}+</p>
-                        <p>Condition: {filteredToy.condition}</p>
-                        {/* <img src={filteredToy.image_url} alt={filteredToy.description} width="100px" height="100px"/> */}
-                        <button onClick={() => handleClick(filteredToy.id, filteredToy.user_id)}>Claim Toy</button>
-                      </li>
-                    ))}
+                      <div className={classes.root}>
+                        <Paper className={classes.paper}>
+                          <Grid container spacing={2}>
+                            <Grid item>
+                              <ButtonBase className={classes.image}>
+                                <img className={classes.img} alt="complex" src={filteredToy.image_url} />
+                              </ButtonBase>
+                            </Grid>
+                            <Grid item xs={12} sm container>
+                              <Grid item xs container direction="column" spacing={2}>
+                                <Grid item xs>
+                                  <Typography gutterBottom variant="subtitle1">
+                                    {filteredToy.title}
+                                  </Typography>
+                                  <Typography variant="body2" gutterBottom>
+                                  {filteredToy.description}
+                                  </Typography>
+                                  <Typography variant="body2" color="textSecondary">
+                                  For ages: {filteredToy.age}+
+                                  </Typography>
+                                  <Typography variant="body2" color="textSecondary">
+                                  Condition: {filteredToy.condition}
+                                  </Typography>
+                                </Grid>
+                                <Grid item>
+                                  <Typography onClick={() => handleClick(filteredToy.id, filteredToy.user_id)} variant="body2" style={{ cursor: 'pointer' }}>
+                                    Claim Toy
+                                  </Typography>
+                                </Grid>
+                              </Grid>
+                              <Grid item>
+                                <Typography variant="subtitle1"></Typography>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                        </Paper>
+                      </div>
+                    </li>
+                  ))}
                 </div>
 
           ) : (
@@ -154,13 +183,13 @@ function Home () {
                                     </Typography>
                                   </Grid>
                                   <Grid item>
-                                    <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                                      Remove
+                                    <Typography onClick={() => handleClick(filteredToy.id, filteredToy.user_id)} variant="body2" style={{ cursor: 'pointer' }}>
+                                      Claim Toy
                                     </Typography>
                                   </Grid>
                                 </Grid>
                                 <Grid item>
-                                  <Typography variant="subtitle1">$19.00</Typography>
+                                  <Typography variant="subtitle1"></Typography>
                                 </Grid>
                               </Grid>
                             </Grid>
@@ -169,8 +198,7 @@ function Home () {
                       </li>
                     ))}
                 </div>
-              )
-              }
+              )}
       </main>  
 )};
 

@@ -1,6 +1,11 @@
 import {useDispatch, useSelector} from 'react-redux';
 import React, {useEffect, useState} from 'react';
 import { useHistory } from "react-router-dom";
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import ButtonBase from '@material-ui/core/ButtonBase';
 
 
 
@@ -11,9 +16,30 @@ function Profile() {
         const toys = useSelector(store => store.toys);
         const user = useSelector(store => store.user);
         const [beingEdited, setBeingEdited] = useState(false);
-        const [userUpdate, setUserUpdate] = useState({city: user.city, email: user.email, phone: user.phone})
-
+        const [userUpdate, setUserUpdate] = useState({city: user.city, email: user.email, phone: user.phone});
         const history = useHistory();
+
+        const useStyles = makeStyles((theme) => ({
+            root: {
+              flexGrow: 1,
+            },
+            paper: {
+              padding: theme.spacing(2),
+              margin: 'auto',
+              maxWidth: 500,
+            },
+            image: {
+              width: 128,
+              height: 128,
+            },
+            img: {
+              margin: 'auto',
+              display: 'block',
+              maxWidth: '100%',
+              maxHeight: '100%',
+            },
+          }));
+          const classes = useStyles();
 
         useEffect(() => {
             dispatch({type: 'FETCH_TOYS'});
@@ -106,34 +132,105 @@ function Profile() {
             <div>
                 <h3>Toys Added</h3>
                 {toys.filter(toy => toy.user_id == user.id ).map(filteredToy => (
-                    <li key={filteredToy.id} class="toyPost">
-                    <p>Toy Title: {filteredToy.title}</p>
-                    <p>Description: {filteredToy.description}</p>
-                    <p>For ages: {filteredToy.age}+</p>
-                    <p>Condition: {filteredToy.condition}</p>
-                    {filteredToy.available ? (
-                        <p>Toy Available</p>
-                    ) : ( 
-                        <p>Toy has been claimed!</p>
-                    )}
-                    <img src={filteredToy.image_url} alt={filteredToy.description} width="100px" height="100px"/>
-                    <button onClick={() => handleMakeAvailable(filteredToy.id)}>No Show</button>
-                    <button onClick={() => handleDelete(filteredToy.id)}>Delete Toy</button>
-                    </li>
+                    <li key={filteredToy.id} class="toy-post">
+                    <div className={classes.root}>
+                      <Paper className={classes.paper}>
+                        <Grid container spacing={2}>
+                          <Grid item>
+                            <ButtonBase className={classes.image}>
+                              <img className={classes.img} alt="complex" src={filteredToy.image_url} />
+                            </ButtonBase>
+                          </Grid>
+                          <Grid item xs={12} sm container>
+                            <Grid item xs container direction="column" spacing={2}>
+                              <Grid item xs>
+                                <Typography gutterBottom variant="subtitle1">
+                                  {filteredToy.title}
+                                </Typography>
+                                <Typography variant="body2" gutterBottom>
+                                {filteredToy.description}
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary">
+                                For ages: {filteredToy.age}+
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary">
+                                Condition: {filteredToy.condition}
+                                </Typography>
+                              </Grid>
+                              {filteredToy.available ? (
+                                  <Typography variant="body2" color="textSecondary">
+                                  Toy Has Not Been Claimed
+                                  </Typography>
+                              ) : (
+                                <> 
+                                <Typography variant="body2" color="textSecondary">
+                                Toy Has Been Claimed
+                                </Typography>
+                                <Typography onClick={() => handleMakeAvailable(filteredToy.id)} variant="body2" style={{ cursor: 'pointer' }}>
+                                No Show
+                                </Typography>
+                                </>
+                              )}
+                              <Grid item>
+                                
+                                <Typography onClick={() => handleDelete(filteredToy.id)} variant="body2" style={{ cursor: 'pointer' }}>
+                                  Delete Toy
+                                </Typography>
+                              </Grid>
+                            </Grid>
+                            <Grid item>
+                              <Typography variant="subtitle1"></Typography>
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                      </Paper>
+                    </div>
+                  </li>
                     ))}
             </div>
 
             <div>
                 <h3>Toys Claimed</h3>
                 {toys.filter(toy => toy.claimer_id == user.id ).map(filteredToy => (
-                    <li key={filteredToy.id} class="toyPost">
-                    <p>Toy Title: {filteredToy.title}</p>
-                    <p>Description: {filteredToy.description}</p>
-                    <p>For ages: {filteredToy.age}+</p>
-                    <p>Condition: {filteredToy.condition}</p>
-                    <img src={filteredToy.image_url} alt={filteredToy.description} width="100px" height="100px"/>
-                    <button onClick={() => handleMakeAvailable(filteredToy.id)}>Cancel Claim</button>
-                    </li>
+                    <li key={filteredToy.id} class="toy-post">
+                    <div className={classes.root}>
+                      <Paper className={classes.paper}>
+                        <Grid container spacing={2}>
+                          <Grid item>
+                            <ButtonBase className={classes.image}>
+                              <img className={classes.img} alt="complex" src={filteredToy.image_url} />
+                            </ButtonBase>
+                          </Grid>
+                          <Grid item xs={12} sm container>
+                            <Grid item xs container direction="column" spacing={2}>
+                              <Grid item xs>
+                                <Typography gutterBottom variant="subtitle1">
+                                  {filteredToy.title}
+                                </Typography>
+                                <Typography variant="body2" gutterBottom>
+                                {filteredToy.description}
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary">
+                                For ages: {filteredToy.age}+
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary">
+                                Condition: {filteredToy.condition}
+                                </Typography>
+                              </Grid>
+                              <Grid item>
+                                <Typography onClick={() => handleMakeAvailable(filteredToy.id)} variant="body2" style={{ cursor: 'pointer' }}>
+                                  Cancel Claim
+                                </Typography>
+                              </Grid>
+                            </Grid>
+                            <Grid item>
+                              <Typography variant="subtitle1"></Typography>
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                      </Paper>
+                    </div>
+                  </li>
                 ))}
             </div>
 
