@@ -1,6 +1,11 @@
 import {useDispatch, useSelector} from 'react-redux';
 import React, {useEffect, useState} from 'react';
 import { useHistory } from "react-router-dom";
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import ButtonBase from '@material-ui/core/ButtonBase';
 
 
 
@@ -12,14 +17,33 @@ function Home () {
         const [filterByCategory, setFilterByCategory] = useState(false);
         const [category, setCategory] = useState(0);
         const [age, setAge] = useState(-1);
-        const filterCategory = 'toy.category';
-        
-        // let [claimedToy, setClaimedToy] = useState({title: '', age: '', condition: '', description: '', image_url: ''});
 
 
-    useEffect(() => {
-        dispatch({ type: 'FETCH_TOYS' });
-      }, [])
+        const useStyles = makeStyles((theme) => ({
+          root: {
+            flexGrow: 1,
+          },
+          paper: {
+            padding: theme.spacing(2),
+            margin: 'auto',
+            maxWidth: 500,
+          },
+          image: {
+            width: 128,
+            height: 128,
+          },
+          img: {
+            margin: 'auto',
+            display: 'block',
+            maxWidth: '100%',
+            maxHeight: '100%',
+          },
+        }));
+        const classes = useStyles();
+
+        useEffect(() => {
+          dispatch({ type: 'FETCH_TOYS' });
+        }, [])
 
     const handleClick = (id, ownerId) => {
         dispatch({type: 'SET_CLAIM', payload: {id: id, ownerId: ownerId,}})
@@ -47,8 +71,6 @@ function Home () {
       }
       return;
   }
-
-    
 
     return (
       <main>
@@ -84,39 +106,101 @@ function Home () {
         </select>
         </div>
 
+        
+
             {filterByCategory ? (
-                <div name="render with category filter">
+                <div name="filtered-home-render">
                     {toys.filter(toy => toy.category == category && toy.age >= age && toy.available == true).map(filteredToy => (
-                      <li key={filteredToy.id} class="toyPost">
-                        <p>Toy Title: {filteredToy.title}</p>
-                        <p>Description: {filteredToy.description}</p>
-                        <p>For ages: {filteredToy.age}+</p>
-                        <p>Condition: {filteredToy.condition}</p>
-                        <img src={filteredToy.image_url} alt={filteredToy.description} width="100px" height="100px"/>
-                        <button onClick={() => handleClick(filteredToy.id, filteredToy.user_id)}>Claim Toy</button>
-                      </li>
-                    ))}
+                      <li key={filteredToy.id} class="toy-post">
+                      <div className={classes.root}>
+                        <Paper className={classes.paper}>
+                          <Grid container spacing={2}>
+                            <Grid item>
+                              <ButtonBase className={classes.image}>
+                                <img className={classes.img} alt="complex" src={filteredToy.image_url} />
+                              </ButtonBase>
+                            </Grid>
+                            <Grid item xs={12} sm container>
+                              <Grid item xs container direction="column" spacing={2}>
+                                <Grid item xs>
+                                  <Typography gutterBottom variant="subtitle1">
+                                    {filteredToy.title}
+                                  </Typography>
+                                  <Typography variant="body2" gutterBottom>
+                                  {filteredToy.description}
+                                  </Typography>
+                                  <Typography variant="body2" color="textSecondary">
+                                  For ages: {filteredToy.age}+
+                                  </Typography>
+                                  <Typography variant="body2" color="textSecondary">
+                                  Condition: {filteredToy.condition}
+                                  </Typography>
+                                </Grid>
+                                <Grid item>
+                                  <Typography onClick={() => handleClick(filteredToy.id, filteredToy.user_id)} variant="body2" style={{ cursor: 'pointer' }}>
+                                    Claim Toy
+                                  </Typography>
+                                </Grid>
+                              </Grid>
+                              <Grid item>
+                                <Typography variant="subtitle1"></Typography>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                        </Paper>
+                      </div>
+                    </li>
+                  ))}
                 </div>
 
           ) : (
 
                 <div class="render all">
                     {toys.filter(toy => toy.available == true).map(filteredToy => (
-                      <li key={filteredToy.id} class="toyPost">
-                        <p>Toy Title: {filteredToy.title}</p>
-                        <p>Description: {filteredToy.description}</p>
-                        <p>For ages: {filteredToy.age}+</p>
-                        <p>Condition: {filteredToy.condition}</p>
-                        <img src={filteredToy.image_url} alt={filteredToy.description} width="100px" height="100px"/>
-                        <button onClick={() => handleClick(filteredToy.id, filteredToy.user_id)}>Claim Toy</button>
+                      <li key={filteredToy.id} class="toy-post">
+                        <div className={classes.root}>
+                          <Paper className={classes.paper}>
+                            <Grid container spacing={2}>
+                              <Grid item>
+                                <ButtonBase className={classes.image}>
+                                  <img className={classes.img} alt="complex" src={filteredToy.image_url} />
+                                </ButtonBase>
+                              </Grid>
+                              <Grid item xs={12} sm container>
+                                <Grid item xs container direction="column" spacing={2}>
+                                  <Grid item xs>
+                                    <Typography gutterBottom variant="subtitle1">
+                                      {filteredToy.title}
+                                    </Typography>
+                                    <Typography variant="body2" gutterBottom>
+                                    {filteredToy.description}
+                                    </Typography>
+                                    <Typography variant="body2" color="textSecondary">
+                                    For ages: {filteredToy.age}+
+                                    </Typography>
+                                    <Typography variant="body2" color="textSecondary">
+                                    Condition: {filteredToy.condition}
+                                    </Typography>
+                                  </Grid>
+                                  <Grid item>
+                                    <Typography onClick={() => handleClick(filteredToy.id, filteredToy.user_id)} variant="body2" style={{ cursor: 'pointer' }}>
+                                      Claim Toy
+                                    </Typography>
+                                  </Grid>
+                                </Grid>
+                                <Grid item>
+                                  <Typography variant="subtitle1"></Typography>
+                                </Grid>
+                              </Grid>
+                            </Grid>
+                          </Paper>
+                        </div>
                       </li>
                     ))}
                 </div>
-              )
-              
-              }
-         
+              )}
       </main>  
 )};
+
 
 export default Home;
