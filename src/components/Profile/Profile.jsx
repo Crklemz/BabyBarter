@@ -86,17 +86,26 @@ function Profile() {
         <div className="container">
         
             <h2>Profile</h2>
-
+            <h3>User Info</h3>
+            <button onClick={toggleEdit}>Edit User Info</button>
             <section class="ownerInfo">
                 <div>
                     {!beingEdited ? (
-                    <div>
-                        <h3>User Info</h3>
-                        <p>Nearest Major City: {user.city}</p>
-                        <p>Email: {user.email}</p>
-                        <p>Phone: {user.phone}</p>
-                        <button onClick={toggleEdit}>Edit User Info</button>
-                    </div>
+
+<div className={classes.root}>
+      <Grid container spacing={3}>
+        <Grid item xs>
+          <Paper className={classes.paper}>Nearest Major City: {user.city}</Paper>
+        </Grid>
+        <Grid item xs>
+          <Paper className={classes.paper}>Email: {user.email}</Paper>
+        </Grid>
+        <Grid item xs>
+          <Paper className={classes.paper}>Phone: {user.phone}</Paper>
+        </Grid>
+      </Grid>
+      
+    </div>    
                     ) : (
                     <div>
                         <h3>User Info</h3>
@@ -127,10 +136,11 @@ function Profile() {
                 </div>
             </section>
 
-                <button onClick={goToAddToy}>Add New Toy</button>
+                
 
             <div>
                 <h3>Toys Added</h3>
+                <button onClick={goToAddToy}>Add New Toy</button>
                 {toys.filter(toy => toy.user_id == user.id ).map(filteredToy => (
                     <li key={filteredToy.id} class="toy-post">
                     <div className={classes.root}>
