@@ -20,14 +20,27 @@ import Header from '../Header/Header';
 import Profile from '../Profile/Profile';
 import AddNewToy from '../AddNewToy/AddNewToy';
 import ConfirmClaim from '../ConfirmClaim/ConfirmClaim';
-import {ThemeProvider} from '@material-ui/core/styles';
+import {makeStyles, ThemeProvider, createMuiTheme} from '@material-ui/core/styles';
+
 
 
 
 
 import './App.css';
+import { lightBlue, pink } from '@material-ui/core/colors';
 
 function App() {
+
+  const theme = createMuiTheme({
+    pallete: {
+      primary: {
+        main: lightBlue[500],
+      },
+      secondary: {
+        main: pink
+      }
+    }
+  })
   
   
   

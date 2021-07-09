@@ -7,6 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import TextField from '@material-ui/core/TextField';
+import './Profile.css';
 
 
 
@@ -27,6 +28,8 @@ function Profile() {
             paper: {
               padding: theme.spacing(2),
               margin: 'auto',
+              marginBottom: '10px',
+
               maxWidth: 500,
             },
             image: {
@@ -84,24 +87,32 @@ function Profile() {
     }
 
     return (
+        <div class="center-all">
         <div className="container">
         
-            <h2>Profile</h2>
+            <h1 class="profile-title">Profile</h1>
             <h3>User Info</h3>
-            
+        </div>  
             <section class="ownerInfo">
                 <div>
                     {!beingEdited ? (
                             <div className={classes.root}>
                                 <button onClick={toggleEdit}>Edit User Info</button>
-                                <Grid container spacing={3}>
-                                    <Grid item xs>
+                                <Grid   container 
+                                        spacing={1} 
+                                        justifyContent="space-evenly"
+                                        alignItems="center">
+                                    <Grid item xs={6}>
                                     <Paper className={classes.paper}>Nearest Major City: {user.city}</Paper>
                                     </Grid>
-                                    <Grid item xs>
+
+
+                                    <Grid item xs={6}>
                                     <Paper className={classes.paper}>Email: {user.email}</Paper>
                                     </Grid>
-                                    <Grid item xs>
+
+                                
+                                    <Grid item xs={6}>
                                     <Paper className={classes.paper}>Phone: {user.phone}</Paper>
                                     </Grid>
                                 </Grid>
@@ -110,8 +121,11 @@ function Profile() {
                         <div>
                             <form onSubmit={handleSubmit}>
                                 <button type="submit">Submit Change</button>
-                                <Grid container spacing={3}>
-                                    <Grid item xs>
+                                <Grid   container 
+                                        spacing={1} 
+                                        justifyContent="space-evenly"
+                                        alignItems="center">
+                                    <Grid item xs={6}>
                                     <Paper className={classes.paper}>
                                         <TextField id="standard-basic" 
                                         type="text" 
@@ -122,7 +136,7 @@ function Profile() {
                                     </Paper>
                                     </Grid>
 
-                                    <Grid item xs>
+                                    <Grid item xs={6}>
                                     <Paper className={classes.paper}>
                                         <TextField id="standard-basic" 
                                         type="text" 
@@ -133,7 +147,7 @@ function Profile() {
                                     </Paper>
                                     </Grid>
 
-                                    <Grid item xs>
+                                    <Grid item xs={6}>
                                     <Paper className={classes.paper}>
                                         <TextField id="standard-basic"
                                         type="text"
@@ -151,12 +165,13 @@ function Profile() {
             </section>
 
                 
-
+        <div class="center-all">
             <div>
                 <h3>Toys Added</h3>
                 <button onClick={goToAddToy}>Add New Toy</button>
+        </div>
                 {toys.filter(toy => toy.user_id == user.id ).map(filteredToy => (
-                    <li key={filteredToy.id} class="toy-post">
+                    <div key={filteredToy.id} class="toy-post">
                     <div className={classes.root}>
                       <Paper className={classes.paper}>
                         <Grid container spacing={2}>
@@ -202,21 +217,18 @@ function Profile() {
                                 </Typography>
                               </Grid>
                             </Grid>
-                            <Grid item>
-                              <Typography variant="subtitle1"></Typography>
-                            </Grid>
                           </Grid>
                         </Grid>
                       </Paper>
                     </div>
-                  </li>
+                  </div>
                     ))}
             </div>
 
             <div>
                 <h3>Toys Claimed</h3>
                 {toys.filter(toy => toy.claimer_id == user.id ).map(filteredToy => (
-                    <li key={filteredToy.id} class="toy-post">
+                    <div key={filteredToy.id} class="toy-post">
                     <div className={classes.root}>
                       <Paper className={classes.paper}>
                         <Grid container spacing={2}>
@@ -247,14 +259,11 @@ function Profile() {
                                 </Typography>
                               </Grid>
                             </Grid>
-                            <Grid item>
-                              <Typography variant="subtitle1"></Typography>
-                            </Grid>
                           </Grid>
                         </Grid>
                       </Paper>
                     </div>
-                  </li>
+                  </div>
                 ))}
             </div>
 

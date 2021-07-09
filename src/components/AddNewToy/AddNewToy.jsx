@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import {useDispatch} from 'react-redux';
 import {useHistory} from "react-router-dom";
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
+import './AddNewToy.css';
 
 
 function AddNewToy() {
@@ -9,6 +17,18 @@ function AddNewToy() {
 
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const useStyles = makeStyles((theme) => ({
+        formControl: {
+          margin: theme.spacing(1),
+          minWidth: 120,
+        },
+        selectEmpty: {
+          marginTop: theme.spacing(2),
+        },
+      }));
+        const classes = useStyles();
+
   
     //handle changes of form
     const handleTitleChange = (event) => {
@@ -65,6 +85,24 @@ function AddNewToy() {
                 <option value="Good">Good</option>
                 <option value="Fair">Fair</option>
             </select>
+
+            {/* <FormControl variant="outlined" className={classes.formControl}>
+        <InputLabel id="demo-simple-select-outlined-label">Condition</InputLabel>
+        <Select
+          labelId="demo-simple-select-outlined-label"
+          id="demo-simple-select-outlined"
+          value={newToy.condition}
+          onChange={handleConditionChange}
+          label="Condition"
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value="Mint">Mint</MenuItem>
+          <MenuItem value="Good">Good</MenuItem>
+          <MenuItem value="Fair">Fair</MenuItem>
+        </Select>
+      </FormControl> */}
 
             <select name="Age" value={newToy.age} onChange={handleAgeChange}>
                 <option>For Ages</option>

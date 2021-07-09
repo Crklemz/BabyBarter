@@ -6,6 +6,12 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import './Home.css';
 
 
 
@@ -26,6 +32,7 @@ function Home () {
           paper: {
             padding: theme.spacing(2),
             margin: 'auto',
+            marginBottom: '10px',
             maxWidth: 500,
           },
           image: {
@@ -37,6 +44,13 @@ function Home () {
             display: 'block',
             maxWidth: '100%',
             maxHeight: '100%',
+          },
+          formControl: {
+            margin: theme.spacing(1),
+            minWidth: 120,
+          },
+          selectEmpty: {
+            marginTop: theme.spacing(2),
           },
         }));
         const classes = useStyles();
@@ -87,79 +101,92 @@ function Home () {
 
     return (
       <main>
+        <div class="filters">
+        <h2 class="available-toys">Available Toys</h2>
+
+
+        <div className={classes.root}>
+
+          <FormControl variant="outlined" className={classes.formControl}>
+            <InputLabel id="demo-simple-select-outlined-label">Category</InputLabel>
+            <Select
+              labelId="demo-simple-select-outlined-label"
+              id="demo-simple-select-outlined"
+              value={category}
+              onChange={toggleCategoryFilter}
+              label="Category"
+              >
+              <MenuItem value="0">Show All</MenuItem>
+              <MenuItem value="1">Slide</MenuItem>
+              <MenuItem value="2">Swing</MenuItem>
+              <MenuItem value="3">Action Figure</MenuItem>
+              <MenuItem value="4">Doll</MenuItem>
+              <MenuItem value="5">Stuffed Animal</MenuItem>
+              <MenuItem value="6">Educational</MenuItem>
+              <MenuItem value="7">Stackable</MenuItem>
+              <MenuItem value="8">Book</MenuItem>
+            </Select>
+          </FormControl>
         
-        <h2>Available Toys:</h2>
-
-        <div>
-        <p>Filter By Category:</p>
-        <select name="Category" value={category} onChange={toggleCategoryFilter}>
-                <option value="0">Show All</option>
-                <option value="1">Slide</option>
-                <option value="2">Swing</option>
-                <option value="3">Action Figure</option>
-                <option value="4">Doll</option>
-                <option value="5">Stuffed Animal</option>
-                <option value="6">Educational</option>
-                <option value="7">Stackable</option>
-                <option value="8">Book</option>
-        </select>
+        
+          <FormControl variant="outlined" className={classes.formControl}>
+            <InputLabel id="demo-simple-select-outlined-label">Age</InputLabel>
+            <Select
+              labelId="demo-simple-select-outlined-label"
+              id="demo-simple-select-outlined"
+              value={age}
+              onChange={toggleAgeFilter}
+              label="Age"
+              >
+              <MenuItem value="-1">Show All</MenuItem>
+              <MenuItem value="0">0+</MenuItem>
+              <MenuItem value="1">1+</MenuItem>
+              <MenuItem value="2">2+</MenuItem>
+              <MenuItem value="3">3+</MenuItem>
+              <MenuItem value="4">4+</MenuItem>
+              <MenuItem value="5">5+</MenuItem>
+              <MenuItem value="6">6+</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
         </div>
 
-        <div>
-        <p>Filter By Age:</p>
-        <select name="Age" value={age} onChange={toggleAgeFilter}>
-                <option value="-1">Show All</option>
-                <option value="0">0+</option>
-                <option value="1">1+</option>
-                <option value="2">2+</option>
-                <option value="3">3+</option>
-                <option value="4">4+</option>
-                <option value="5">5+</option>
-                <option value="6">6+</option>
-        </select>
-        </div>
-
-                <div name="filtered-home-render">
-                    {toysToFilter().map(filteredToy => (
-                      <li key={filteredToy.id} class="toy-post">
-                      <div className={classes.root}>
-                        <Paper className={classes.paper}>
-                          <Grid container spacing={2}>
-                            <Grid item>
-                              <ButtonBase className={classes.image}>
-                                <img className={classes.img} alt="complex" src={filteredToy.image_url} />
-                              </ButtonBase>
-                            </Grid>
-                            <Grid item xs={12} sm container>
-                              <Grid item xs container direction="column" spacing={2}>
-                                <Grid item xs>
-                                  <Typography gutterBottom variant="subtitle1">
-                                    {filteredToy.title}
-                                  </Typography>
-                                  <Typography variant="body2" gutterBottom>
-                                  {filteredToy.description}
-                                  </Typography>
-                                  <Typography variant="body2" color="textSecondary">
-                                  For ages: {filteredToy.age}+
-                                  </Typography>
-                                  <Typography variant="body2" color="textSecondary">
-                                  Condition: {filteredToy.condition}
-                                  </Typography>
-                                </Grid>
-                                <Grid item>
-                                  <Typography onClick={() => handleClick(filteredToy.id, filteredToy.user_id)} variant="body2" style={{ cursor: 'pointer' }}>
-                                    Claim Toy
-                                  </Typography>
-                                </Grid>
-                              </Grid>
-                              <Grid item>
-                                <Typography variant="subtitle1"></Typography>
-                              </Grid>
-                            </Grid>
-                          </Grid>
-                        </Paper>
-                      </div>
-                    </li>
+        <div name="filtered-home-render">
+          {toysToFilter().map(filteredToy => (
+            <div key={filteredToy.id} class="toy-post" className={classes.root}>
+              <Paper className={classes.paper}>
+                <Grid container spacing={2}>
+                  <Grid item>
+                    <ButtonBase className={classes.image}>
+                      <img className={classes.img} alt="complex" src={filteredToy.image_url} />
+                    </ButtonBase>
+                  </Grid>
+                  <Grid item xs={12} sm container>
+                    <Grid item xs container direction="column" spacing={2}>
+                      <Grid item xs>
+                        <Typography gutterBottom variant="subtitle1">
+                          {filteredToy.title}
+                        </Typography>
+                        <Typography variant="body2" gutterBottom>
+                          {filteredToy.description}
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary">
+                          For ages: {filteredToy.age}+
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary">
+                          Condition: {filteredToy.condition}
+                        </Typography>
+                      </Grid>
+                      <Grid item>
+                        <Typography onClick={() => handleClick(filteredToy.id, filteredToy.user_id)} variant="body2" style={{ cursor: 'pointer' }}>
+                          Claim Toy
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Paper>
+                    </div>
                   ))}
                 </div>
       </main>  
