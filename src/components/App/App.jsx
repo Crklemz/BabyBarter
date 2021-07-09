@@ -21,11 +21,6 @@ import Profile from '../Profile/Profile';
 import AddNewToy from '../AddNewToy/AddNewToy';
 import ConfirmClaim from '../ConfirmClaim/ConfirmClaim';
 import {makeStyles, ThemeProvider, createMuiTheme} from '@material-ui/core/styles';
-
-
-
-
-
 import './App.css';
 import { lightBlue, pink } from '@material-ui/core/colors';
 
