@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
+import './ConfirmClaim.css';
 
 
 function ConfirmClaim() {
@@ -53,21 +54,19 @@ function ConfirmClaim() {
 
     return (
         <>
-        <p>confirm claim page</p>
-
-        <div>
+        <div class="center-all">
+          <h1 class="confirm-claim-title">Confirm Claim</h1>
             <h3>Toy Owner's Info</h3>
             {userInfo.filter(owner => owner.id == claimed.ownerId).map(filteredOwner => (
-                <li key={filteredOwner.id} class="ownerInfo">
+                <div key={filteredOwner.id} class="ownerInfo">
                 <p>City: {filteredOwner.city} Email: {filteredOwner.email} Phone: {filteredOwner.phone}</p>
-                </li>
+                </div>
             ))}
         </div>
 
         <div>
-            <h3>Toy Details</h3>
             {toys.filter(toy => toy.id == claimed.id).map(filteredToy => (
-                <li key={filteredToy.id} class="toyPost">
+                <div key={filteredToy.id} class="toyPost">
                 <div className={classes.root}>
                         <Paper className={classes.paper}>
                           <Grid container spacing={2}>
@@ -108,7 +107,7 @@ function ConfirmClaim() {
                           </Grid>
                         </Paper>
                       </div>
-                </li>
+                </div>
             ))}
         </div>
         

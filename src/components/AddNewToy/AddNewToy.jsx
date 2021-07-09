@@ -7,6 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
 
 import './AddNewToy.css';
 
@@ -26,6 +27,12 @@ function AddNewToy() {
         selectEmpty: {
           marginTop: theme.spacing(2),
         },
+        root: {
+            '& > *': {
+              margin: theme.spacing(1),
+              width: '25ch',
+            },
+          },
       }));
         const classes = useStyles();
 
@@ -73,20 +80,58 @@ function AddNewToy() {
 
     return (
         <>
-        <p>add new toy page</p>
+        <h1 class="add-new-toy-title">Add New Toy!</h1> 
+        
+        <form class="add-toy-form" onSubmit={handleSubmit}> 
+        <div class="text-fields">
+            <TextField id="outlined-basic" label="Add Toy Title" variant="outlined" type="text" value={newToy.title} onChange={handleTitleChange} />
+            <TextField id="outlined-basic" label="Add a Description" variant="outlined" type="text" value={newToy.description} onChange={handleDescriptionChange} size="20"/>
+            <TextField id="outlined-basic" label="Add Image url" variant="outlined" type="text" value={newToy.image_url} onChange={handleImageChange}/>
+        </div>
+        
 
-        <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="Add Toy Title" value={newToy.title} onChange={handleTitleChange} />
-            <input type="text" placeholder="Add Image URL" value={newToy.image_url} onChange={handleImageChange}/>
+        <FormControl variant="outlined" className={classes.formControl}>
+        <InputLabel id="demo-simple-select-outlined-label">Category</InputLabel>
+        <Select
+          labelId="demo-simple-select-outlined-label"
+          id="demo-simple-select-outlined"
+          value={newToy.category}
+          onChange={handleCategoryChange}
+          label="Category"
+        >
+          
+          <MenuItem value="1">Slide</MenuItem>
+                <MenuItem value="2">Swing</MenuItem>
+                <MenuItem value="3">Action Figure</MenuItem>
+                <MenuItem value="4">Doll</MenuItem>
+                <MenuItem value="5">Stuffed Animal</MenuItem>
+                <MenuItem value="6">Educational</MenuItem>
+                <MenuItem value="7">Stackable</MenuItem>
+                <MenuItem value="8">Book</MenuItem>
+        </Select>
+      </FormControl>
 
-            <select name="Condition" value={newToy.condition} onChange={handleConditionChange}>
-                <option>Condition</option>
-                <option value="Mint">Mint</option>
-                <option value="Good">Good</option>
-                <option value="Fair">Fair</option>
-            </select>
+      <FormControl variant="outlined" className={classes.formControl}>
+        <InputLabel id="demo-simple-select-outlined-label">Age</InputLabel>
+        <Select
+          labelId="demo-simple-select-outlined-label"
+          id="demo-simple-select-outlined"
+          value={newToy.age}
+          onChange={handleAgeChange}
+          label="Age"
+        >
+          
+          <MenuItem value="0">0+</MenuItem>
+                <MenuItem value="1">1+</MenuItem>
+                <MenuItem value="2">2+</MenuItem>
+                <MenuItem value="3">3+</MenuItem>
+                <MenuItem value="4">4+</MenuItem>
+                <MenuItem value="5">5+</MenuItem>
+                <MenuItem value="6">6+</MenuItem>
+        </Select>
+      </FormControl>
 
-            {/* <FormControl variant="outlined" className={classes.formControl}>
+            <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel id="demo-simple-select-outlined-label">Condition</InputLabel>
         <Select
           labelId="demo-simple-select-outlined-label"
@@ -95,41 +140,18 @@ function AddNewToy() {
           onChange={handleConditionChange}
           label="Condition"
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
+          
           <MenuItem value="Mint">Mint</MenuItem>
           <MenuItem value="Good">Good</MenuItem>
           <MenuItem value="Fair">Fair</MenuItem>
         </Select>
-      </FormControl> */}
+      </FormControl>
 
-            <select name="Age" value={newToy.age} onChange={handleAgeChange}>
-                <option>For Ages</option>
-                <option value="0">0+</option>
-                <option value="1">1+</option>
-                <option value="2">2+</option>
-                <option value="3">3+</option>
-                <option value="4">4+</option>
-                <option value="5">5+</option>
-                <option value="6">6+</option>
-            </select>
-
-            <select name="Category" value={newToy.category} onChange={handleCategoryChange}>
-                <option>Category</option>
-                <option value="1">Slide</option>
-                <option value="2">Swing</option>
-                <option value="3">Action Figure</option>
-                <option value="4">Doll</option>
-                <option value="5">Stuffed Animal</option>
-                <option value="6">Educational</option>
-                <option value="7">Stackable</option>
-                <option value="8">Book</option>
-            </select>
-
-            <input type="text" placeholder="Add a Description:" value={newToy.description} onChange={handleDescriptionChange} size="20"/>
+      <div class="buttons">
             <button type="submit">Add Toy</button>
-            <button onClick={handleCancel}>cancel</button>
+            <button onClick={handleCancel}>Cancel</button>
+        </div>
+
         </form>
 
 

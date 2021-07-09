@@ -1,0 +1,11 @@
+.center-all {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    align-content: center;
+}
+
+.confirm-claim-title {
+    text-decoration: underline;
+    
+}

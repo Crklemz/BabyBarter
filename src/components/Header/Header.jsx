@@ -18,11 +18,12 @@ function Header() {
   }
 
   return (
+    <>
     <div className="nav">
       <Link to="/home">
         <h2 className="nav-title">BabyBarter</h2>
       </Link>
-      <p>Less Waste - Save Money - MAKE SPACE!</p>
+      
 
       <div>
         <Link className="navLink" to="/home">
@@ -46,10 +47,16 @@ function Header() {
             {loginLinkData.text}
             </Link>
           )}
-
         
       </div>
+
+      
+      
     </div>
+    <div class="slogan">
+    <p>Less Waste - Save Money - MAKE SPACE!</p>
+    </div>
+    </>
   );
 }
 

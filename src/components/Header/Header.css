@@ -1,11 +1,11 @@
 .nav {
   /* flex box layout */
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
 
-  margin: 0 0 30px;
-  background-color: #00acb0;
+  margin: 0 0 5px;
+  background-color: #2097ff;
   overflow: hidden;
 }
 
@@ -14,17 +14,17 @@
 }
 
 .nav-title {
-  font-size: 24px;
+  font-size: 34px;
   font-weight: 700;
-  color: #f2f2f2;
+  color: #edabf3;
   padding-left: 10px;
   margin: 0;
 }
 
 .navLink {
   display: inline-block;
-  color: #f2f2f2;
-  background-color: #00acb0;
+  color: #edabf3;
+  background-color: #2097ff;
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
@@ -39,4 +39,12 @@
 
 .navLink:hover {
   background-color: #008183;
+}
+
+.slogan {
+  margin: auto;
+  width: 50%;
+  text-align: center;
+  align-content: center;
+
 }
