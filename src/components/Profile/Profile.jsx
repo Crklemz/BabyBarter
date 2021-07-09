@@ -88,7 +88,7 @@ function Profile() {
 
     return (
         <div class="center-all">
-        <div className="container">
+        <div>
         
             <h1 class="profile-title">Profile</h1>
             <h3>User Info</h3>
