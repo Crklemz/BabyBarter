@@ -1,0 +1,14 @@
+.about-title {
+    text-decoration: underline;
+    margin: auto;
+
+    width: 50%;
+    text-align: center;
+}
+
+.center-all {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    align-content: center;
+}

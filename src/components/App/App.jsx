@@ -20,6 +20,7 @@ import Header from '../Header/Header';
 import Profile from '../Profile/Profile';
 import AddNewToy from '../AddNewToy/AddNewToy';
 import ConfirmClaim from '../ConfirmClaim/ConfirmClaim';
+import About from '../About/About';
 import {makeStyles, ThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 import './App.css';
 import { lightBlue, pink } from '@material-ui/core/colors';
@@ -130,6 +131,13 @@ function App() {
             path="/home"
           >
             <Home />
+          </Route>
+
+          <Route
+            exact
+            path="/about"
+          >
+            <About />
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}

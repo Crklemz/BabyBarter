@@ -43,10 +43,16 @@ function Header() {
             <LogOutButton className="navLink" />
           </>
         ) : (
+
             <Link className="navLink" to={loginLinkData.path}>
             {loginLinkData.text}
             </Link>
+
           )}
+
+            <Link className="navLink" to="/about">
+              About
+            </Link>
         
       </div>
 
