@@ -25,6 +25,7 @@ function ConfirmClaim() {
               padding: theme.spacing(2),
               margin: 'auto',
               maxWidth: 500,
+              marginTop: '10px',
             },
             image: {
               width: 128,
@@ -58,8 +59,25 @@ function ConfirmClaim() {
           <h1 class="confirm-claim-title">Confirm Claim</h1>
             <h3>Toy Owner's Info</h3>
             {userInfo.filter(owner => owner.id == claimed.ownerId).map(filteredOwner => (
-                <div key={filteredOwner.id} class="ownerInfo">
-                <p>City: {filteredOwner.city} Email: {filteredOwner.email} Phone: {filteredOwner.phone}</p>
+                <div key={filteredOwner.id} className={classes.root}>
+                  <Grid container 
+                        spacing={1} 
+                        justifyContent="space-evenly"
+                        alignItems="center">
+
+                    <Grid item xs={6}>
+                      <Paper className={classes.paper}>City: {filteredOwner.city}</Paper>
+                    </Grid>
+
+                    <Grid item xs={6}>
+                      <Paper className={classes.paper}>Email: {filteredOwner.email}</Paper>
+                    </Grid>
+                                
+                    <Grid item xs={6}>
+                      <Paper className={classes.paper}>Phone: {filteredOwner.phone}</Paper>
+                    </Grid>
+
+                  </Grid>
                 </div>
             ))}
         </div>

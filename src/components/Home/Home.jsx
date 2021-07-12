@@ -11,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+
 import './Home.css';
 
 
@@ -102,7 +103,7 @@ function Home () {
     return (
       <main>
         <div class="filters">
-        <h2 class="available-toys">Available Toys</h2>
+        <h1 class="available-toys">Available Toys</h1>
 
 
         <div className={classes.root}>
