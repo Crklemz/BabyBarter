@@ -7,6 +7,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
 import './Profile.css';
 
 
@@ -24,12 +26,15 @@ function Profile() {
         const useStyles = makeStyles((theme) => ({
             root: {
               flexGrow: 1,
+              '& > *': {
+                margin: theme.spacing(1),
+              },
             },
             paper: {
               padding: theme.spacing(2),
               margin: 'auto',
               marginBottom: '10px',
-
+              marginTop: '5px',
               maxWidth: 500,
             },
             image: {
@@ -97,7 +102,7 @@ function Profile() {
                 <div>
                     {!beingEdited ? (
                             <div className={classes.root}>
-                                <button onClick={toggleEdit}>Edit User Info</button>
+                                <Button variant="outlined"  onClick={toggleEdit}>Edit User Info</Button>
                                 <Grid   container 
                                         spacing={1} 
                                         justifyContent="space-evenly"
@@ -120,7 +125,7 @@ function Profile() {
                     ) : (
                         <div>
                             <form onSubmit={handleSubmit}>
-                                <button type="submit">Submit Change</button>
+                                <Button variant="outlined"  type="submit">Submit Change</Button>
                                 <Grid   container 
                                         spacing={1} 
                                         justifyContent="space-evenly"
@@ -166,9 +171,10 @@ function Profile() {
 
                 
         <div class="center-all">
-            <div>
+          <div>
                 <h3>Toys Added</h3>
-                <button onClick={goToAddToy}>Add New Toy</button>
+                <Button variant="outlined" onClick={goToAddToy}>Add New Toy</Button>
+            </div>
         </div>
                 {toys.filter(toy => toy.user_id == user.id ).map(filteredToy => (
                     <div key={filteredToy.id} class="toy-post">
@@ -223,7 +229,7 @@ function Profile() {
                     </div>
                   </div>
                     ))}
-            </div>
+          
 
             <div>
                 <h3>Toys Claimed</h3>

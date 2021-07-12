@@ -8,6 +8,8 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
 
 import './AddNewToy.css';
 
@@ -84,9 +86,9 @@ function AddNewToy() {
         
         <form class="add-toy-form" onSubmit={handleSubmit}> 
         <div class="text-fields">
-            <TextField id="outlined-basic" label="Add Toy Title" variant="outlined" type="text" value={newToy.title} onChange={handleTitleChange} />
-            <TextField id="outlined-basic" label="Add a Description" variant="outlined" type="text" value={newToy.description} onChange={handleDescriptionChange} size="20"/>
-            <TextField id="outlined-basic" label="Add Image url" variant="outlined" type="text" value={newToy.image_url} onChange={handleImageChange}/>
+            <TextField className={classes.formControl} id="outlined-basic" label="Add Toy Title" variant="outlined" type="text" value={newToy.title} onChange={handleTitleChange} />
+            <TextField className={classes.formControl} id="outlined-basic" label="Add a Description" variant="outlined" type="text" value={newToy.description} onChange={handleDescriptionChange} size="20"/>
+            <TextField className={classes.formControl} id="outlined-basic" label="Add Image url" variant="outlined" type="text" value={newToy.image_url} onChange={handleImageChange}/>
         </div>
         
 
@@ -148,8 +150,8 @@ function AddNewToy() {
       </FormControl>
 
       <div class="buttons">
-            <button type="submit">Add Toy</button>
-            <button onClick={handleCancel}>Cancel</button>
+            <Button variant="outlined" className={classes.formControl} type="submit">Add Toy</Button>
+            <Button variant="outlined" className={classes.formControl} onClick={handleCancel}>Cancel</Button>
         </div>
 
         </form>
