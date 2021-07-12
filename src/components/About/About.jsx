@@ -17,6 +17,10 @@ function About() {
                 <p>Node</p>
                 <p>Express</p>
                 <p>Material UI</p>
+
+                <h4>Future Features:</h4>
+                <p>Upload photos taken by the users</p>
+                <p>In app messaging</p>
                 </div>
             </>
 
