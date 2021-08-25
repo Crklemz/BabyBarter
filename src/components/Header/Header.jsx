@@ -1,10 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
+//mui import
+import { useStyles } from '../MuiStyling/MuiStyling';
 
 function Header() {
   const user = useSelector((store) => store.user);
+
+  const classes = useStyles();
+
 
   let loginLinkData = {
     path: '/login',
@@ -18,49 +23,52 @@ function Header() {
 
   return (
     <>
-    <div className="nav">
-      <Link to="/home">
-        <h2 className="nav-title">BabyBarter</h2>
-      </Link>
-      
 
-      <div>
-        <Link className="navLink" to="/home">
-          Home
+
+      <div className={classes.Header}>
+        <div className={classes.NavBar}>
+          <Link className={classes.NavLink} to="/about">
+            About
+            </Link>
+
+          {user.id ? (
+            <>
+              <Link className={classes.NavLink} to="/profile">
+                Profile
+            </Link>
+
+              <Link className={classes.NavLink} to="/addnewtoy">
+                Add New Toy
+            </Link>
+
+              <LogOutButton />
+            </>
+          ) : (
+
+
+
+            <Link className={classes.NavLink} to={loginLinkData.path}>
+              {loginLinkData.text}
+            </Link>
+
+            )}
+
+            <Link className={classes.NavLink} to="/home">
+              Home
+            </Link>
+        </div>
+
+
+        <Link to="/home">
+          <h2>BabyBarter</h2>
         </Link>
 
-        {user.id ? (
-          <>
-            <Link className="navLink" to="/profile">
-              Profile
-            </Link>
-
-            <Link className="navLink" to="/addnewtoy">
-              Add New Toy
-            </Link>
-
-            <LogOutButton className="navLink" />
-          </>
-        ) : (
-
-            <Link className="navLink" to={loginLinkData.path}>
-            {loginLinkData.text}
-            </Link>
-
-          )}
-
-            <Link className="navLink" to="/about">
-              About
-            </Link>
-        
       </div>
 
-      
-      
-    </div>
-    <div class="slogan">
-    <p>Less Waste - Save Money - MAKE SPACE!</p>
-    </div>
+      <div>
+        <p className={classes.HeaderSlogan}>Less Waste - Save Money - MAKE SPACE!</p>
+      </div>
+
     </>
   );
 }
