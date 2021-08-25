@@ -11,9 +11,9 @@ AboutBodyLists: {
 
 
     display: 'flex',
-    alignItems: 'center',
+
     justifyContent: 'center',
-    backgroundColor: 'pink',
+
 }
 
 }) //end use/make styles

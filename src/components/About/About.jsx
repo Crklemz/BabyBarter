@@ -8,11 +8,12 @@ function About() {
 
     return (
         <div className={classes.AboutBodyLists}>
-            <div>
-            <h1>About</h1>
-            </div>
+
+            
+
             
             <div>
+            <h1>About</h1>
                 <h4>Technology Used:</h4>
                 <p>React</p>
                 <p>Reach-Redux</p>
