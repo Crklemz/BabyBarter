@@ -6,16 +6,17 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
-import './ConfirmClaim.css';
+
 
 
 function ConfirmClaim() {
 
         const dispatch = useDispatch();
+        const history = useHistory();
+
         const toys = useSelector(store => store.toys);
         const userInfo = useSelector(store => store.userInfo);
         const claimed = useSelector(store => store.claimed);
-        const history = useHistory();
 
         const useStyles = makeStyles((theme) => ({
             root: {

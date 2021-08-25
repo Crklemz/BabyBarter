@@ -1,13 +1,18 @@
 import React from 'react';
-import './About.css';
+
+import { useStyles } from '../MuiStyling/MuiStyling';
 
 function About() {
 
+    const classes = useStyles();
 
     return (
-            <>
-                <h1 class="about-title">About</h1>
-                <div class="center-all">
+        <div className={classes.AboutBodyLists}>
+            <div>
+            <h1>About</h1>
+            </div>
+            
+            <div>
                 <h4>Technology Used:</h4>
                 <p>React</p>
                 <p>Reach-Redux</p>
@@ -21,9 +26,8 @@ function About() {
                 <h4>Future Features:</h4>
                 <p>Upload photos taken by the users</p>
                 <p>In app messaging</p>
-                </div>
-            </>
-
+            </div>
+        </div>
     )
 }
 

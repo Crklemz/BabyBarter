@@ -10,10 +10,6 @@ import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-
-import './AddNewToy.css';
-
-
 function AddNewToy() {
 
     let [newToy, setNewToy] = useState({title: '', image_url: '', condition: '', age: '', category: '', description: ''});
