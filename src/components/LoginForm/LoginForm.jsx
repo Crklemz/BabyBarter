@@ -83,7 +83,7 @@ function LoginForm() {
 
           <TextField
           className={classes.formControl}
-          label="UserName"
+          label="Password"
             type="password"
             name="password"
             variant="outlined"

@@ -32,7 +32,7 @@ CREATE TABLE "items" (
   OIDS=FALSE
 );
 
---Add categories to insert into table!!!!!!!!!!!!!!!!!!!!!
+
 CREATE TABLE "Categories" ( 
 	"id" serial NOT NULL,
 	"category" varchar (255) NOT NULL,
