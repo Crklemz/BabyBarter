@@ -1,10 +1,11 @@
-BabyBarter - A platform to connect parents with other parents to trade toys with no money involved.
+BabyBarter - A platform to connect parents with other parents to trade toys with no money involved. This app was created as a way for parents to save money, open up space in their homes, and reduce plastic waste in our landfills.
+
 
 A deployed version can be viewed at https://baby-barter.herokuapp.com/#/home
 
+
 Duration: 2 Weeks
 
-This app was created as a way for parents to save money, open up space in their homes, and reduce plastic waste in our landfills.
 
 Prerequisites:
 Node.js: https://nodejs.org/en/
