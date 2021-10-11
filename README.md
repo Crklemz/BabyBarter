@@ -8,12 +8,17 @@ Duration: 2 Weeks
 
 
 Prerequisites:
+
 Node.js: https://nodejs.org/en/
+
 PostgreSQL: https://www.postgresql.org/
 
 Support:
 Please feel free to reach out to me with any feedback or suggestions.
 
 Chris Klemz:
+
 LinkedIn: https://www.linkedin.com/in/chris-klemz-681b11180/
+
+
 GitHub: https://github.com/Crklemz
